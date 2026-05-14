@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56">
+  <!-- Green background pill -->
+  <rect width="160" height="56" rx="10" fill="#00B14F"/>
+  <!-- Grab wordmark - white bold rounded -->
+  <text x="80" y="39"
+    font-family="'Arial Rounded MT Bold', 'Nunito', 'Varela Round', Arial, sans-serif"
+    font-size="30"
+    font-weight="800"
+    fill="white"
+    text-anchor="middle"
+    letter-spacing="-0.5">Grab</text>
+</svg>

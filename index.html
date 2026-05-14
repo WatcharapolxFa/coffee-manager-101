@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Coffee Manager">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <title>RADIANT Coffee &amp; Bakery</title>
+  <link rel="icon" type="image/svg+xml" href="assets/shop-logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <img src="assets/shop-logo.svg" class="shop-logo" alt="RADIANT Coffee & Bakery">
+</header>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <button class="nav-tab" data-tab="dashboard">📊<br>ภาพรวม</button>
+  <button class="nav-tab" data-tab="sales">📝<br>บันทึกขาย</button>
+  <button class="nav-tab" data-tab="menus">☕<br>เมนู</button>
+  <button class="nav-tab" data-tab="overhead">💰<br>ต้นทุนแฝง</button>
+  <button class="nav-tab" data-tab="report">📈<br>รายงาน</button>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <!-- TAB 1: DASHBOARD -->
+  <div id="tab-dashboard" class="tab-panel">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <div class="stat-val" id="stat-revenue">฿0.00</div>
+        <div class="stat-label">ยอดขายเดือนนี้</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">☕</div>
+        <div class="stat-val" id="stat-cups">0</div>
+        <div class="stat-label">แก้วที่ขาย</div>
+      </div>
+      <div class="stat-card" style="border-left-color:#2E7D32">
+        <div class="stat-icon">📊</div>
+        <div class="stat-val" id="stat-profit" style="color:#2E7D32">฿0.00</div>
+        <div class="stat-label">กำไรโดยประมาณ</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">ยอดขายรายวัน (เดือนนี้)</div>
+      <div class="chart-box"><canvas id="dash-chart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">เมนูขายดี 🏆</div>
+      <div id="top-menus"></div>
+    </div>
+  </div>
+
+  <!-- TAB 2: SALES (POS style) -->
+  <div id="tab-sales" class="tab-panel">
+    <div class="pos-topbar">
+      <input type="date" id="sales-date" class="form-control pos-date">
+      <div class="channel-toggle">
+        <button class="ch-btn active" data-ch="delivery1" onclick="app.setChannel('delivery1')">
+          <img src="assets/grab-logo.svg" class="ch-logo" alt="Grab">
+        </button>
+        <button class="ch-btn" data-ch="delivery2" onclick="app.setChannel('delivery2')">
+          <img src="assets/lineman-logo.svg" class="ch-logo" alt="LINE MAN">
+        </button>
+      </div>
+    </div>
+    <div id="pos-menu-grid" class="pos-menu-grid"></div>
+    <div id="pos-cart" class="pos-cart" style="display:none">
+      <div class="pos-cart-header">
+        <span>🛒 ออเดอร์</span>
+        <button class="btn btn-danger btn-sm" onclick="app.clearCart()">ล้าง</button>
+      </div>
+      <div id="pos-cart-items"></div>
+      <div class="pos-cart-footer">
+        <div class="pos-cart-total">
+          <span>รวม</span>
+          <span id="pos-cart-total-val" class="fw-bold" style="font-size:20px;color:var(--brown-dark)">฿0.00</span>
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:8px;font-size:16px;padding:12px" onclick="app.confirmOrder()">✅ บันทึกออเดอร์</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="flex-between" style="margin-bottom:10px">
+        <span class="section-title">บันทึกวันนี้</span>
+        <span class="fw-bold color-brown" id="sales-day-total">฿0.00</span>
+      </div>
+      <div id="sales-history-list"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: MENUS (รวมต้นทุน) -->
+  <div id="tab-menus" class="tab-panel">
+    <div class="section-header">
+      <span class="section-title">เมนูทั้งหมด</span>
+      <button class="btn btn-primary" onclick="app.openAddMenu()">+ เพิ่มเมนู</button>
+    </div>
+    <div id="menu-grid" class="menu-grid"></div>
+  </div>
+
+  <!-- TAB 4: OVERHEAD COSTS (all menus) -->
+  <div id="tab-overhead" class="tab-panel">
+    <div id="overhead-container"></div>
+    <button id="overhead-save-all-btn" class="btn btn-primary btn-full"
+            style="font-size:15px;padding:13px;margin-top:4px" onclick="app.saveAllOverhead()">
+      💾 บันทึกทั้งหมด
+    </button>
+  </div>
+
+  <!-- TAB 5: REPORT -->
+  <div id="tab-report" class="tab-panel">
+    <div class="card">
+      <div class="month-picker">
+        <select id="report-month" class="form-control">
+          <option value="1">มกราคม</option><option value="2">กุมภาพันธ์</option>
+          <option value="3">มีนาคม</option><option value="4">เมษายน</option>
+          <option value="5">พฤษภาคม</option><option value="6">มิถุนายน</option>
+          <option value="7">กรกฎาคม</option><option value="8">สิงหาคม</option>
+          <option value="9">กันยายน</option><option value="10">ตุลาคม</option>
+          <option value="11">พฤศจิกายน</option><option value="12">ธันวาคม</option>
+        </select>
+        <select id="report-year" class="form-control" style="max-width:100px"></select>
+      </div>
+    </div>
+    <div id="report-summary"></div>
+    <div id="report-charts"></div>
+    <div class="card" style="margin-top:0">
+      <div class="card-title">สรุปตามเมนู</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>เมนู</th>
+            <th class="text-center">แก้ว</th>
+            <th class="text-right">รายได้</th>
+            <th class="text-right">ต้นทุน</th>
+            <th class="text-right">กำไร</th>
+          </tr>
+        </thead>
+        <tbody id="report-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<!-- ========== MENU EDIT MODAL ========== -->
+<div id="menu-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span id="modal-title">+ เพิ่มเมนูใหม่</span>
+      <button class="modal-close" onclick="app.closeMenuModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">ชื่อเมนู</label>
+        <input type="text" id="menu-name" class="form-control" placeholder="เช่น Iced Cafe Latte">
+      </div>
+
+      <div class="card-title" style="margin:12px 0 6px">วัตถุดิบ</div>
+      <table class="ing-table">
+        <thead>
+          <tr><th>#</th><th>วัตถุดิบ</th><th>ปริมาณทั้งหมด</th><th>ราคาทั้งหมด (฿)</th><th>ที่ใช้</th><th></th></tr>
+        </thead>
+        <tbody id="ing-tbody"></tbody>
+      </table>
+      <button class="btn btn-secondary btn-sm mt-8" onclick="app.addIng()">+ เพิ่มวัตถุดิบ</button>
+
+      <div class="form-row mt-12">
+        <div class="form-group">
+          <label class="form-label">VAT (%)</label>
+          <input type="number" id="menu-vat" class="form-control" value="7" min="0" max="30">
+        </div>
+      </div>
+
+      <div class="card-title" style="margin:12px 0 6px">บรรจุภัณฑ์ Delivery</div>
+      <table class="ing-table">
+        <thead>
+          <tr><th>#</th><th>บรรจุภัณฑ์</th><th>ปริมาณทั้งหมด</th><th>ราคาทั้งหมด (฿)</th><th>ที่ใช้</th><th></th></tr>
+        </thead>
+        <tbody id="pkg-tbody"></tbody>
+      </table>
+      <button class="btn btn-secondary btn-sm mt-8" onclick="app.addPkg()">+ เพิ่มบรรจุภัณฑ์</button>
+
+      <div class="form-row mt-12">
+        <div class="form-group">
+          <label class="form-label">Packaging Waste (%)</label>
+          <input type="number" id="pkg-waste" class="form-control" value="5" min="0" max="100">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ตัวคูณ <img src="assets/grab-logo.svg" style="height:14px;vertical-align:middle"></label>
+          <input type="number" id="company1-gp" class="form-control" value="1.5" min="1" max="10" step="0.01">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ตัวคูณ <img src="assets/lineman-logo.svg" style="height:14px;vertical-align:middle"></label>
+          <input type="number" id="company2-gp" class="form-control" value="1.25" min="1" max="10" step="0.01">
+        </div>
+      </div>
+
+      <div class="card-title" style="margin:10px 0 4px">ราคาคำนวณ (preview)</div>
+      <div class="calc-preview" id="modal-calc"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="app.closeMenuModal()">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="app.saveMenu()">💾 บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== COST DETAIL MODAL ========== -->
+<div id="cost-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span id="cost-modal-title">🧮 ต้นทุน</span>
+      <button class="modal-close" onclick="app.closeCostModal()">✕</button>
+    </div>
+    <div class="modal-body" id="cost-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="app.closeCostModal()">ปิด</button>
+      <button class="btn btn-primary" id="cost-modal-edit-btn">✏️ แก้ไขเมนู</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

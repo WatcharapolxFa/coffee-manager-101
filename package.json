@@ -1,0 +1,16 @@
+{
+  "name": "coffee-manager-101",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.0.0",
+    "happy-dom": "^14.0.0",
+    "sharp": "^0.34.5",
+    "vitest": "^2.0.0"
+  }
+}
