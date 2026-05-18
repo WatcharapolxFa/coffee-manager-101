@@ -1,8 +1,8 @@
-
 import { getMenus, getMenuById, addMenu, updateMenu, deleteMenu } from '../storage.js';
 import { calcMenu } from '../calculator.js';
 import { thb, menuIcon } from '../utils.js';
 import { DEFAULTS } from '../config.js';
+import { t } from '../i18n.js';
 
 let editingMenuId    = null;
 let modalIngredients = [];
@@ -14,7 +14,7 @@ export function renderMenus() {
   const grid  = document.getElementById('menu-grid');
 
   if (menus.length === 0) {
-    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">☕</div><p>ยังไม่มีเมนู กด "+ เพิ่มเมนู" เพื่อเริ่มต้น</p></div>';
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">☕</div><p>${t('menus.no_menus')}</p></div>`;
     return;
   }
 
@@ -29,9 +29,9 @@ export function renderMenus() {
         <img src="assets/grab-logo.svg" style="height:13px"> ${thb(c.c1IncVAT)} &nbsp;·&nbsp;
         <img src="assets/lineman-logo.svg" style="height:13px"> ${thb(c.c2IncVAT)}
       </div>
-      <div class="menu-card-sub" style="margin-top:2px">ต้นทุน ${thb(c.costWithWaste)}</div>
+      <div class="menu-card-sub" style="margin-top:2px">${t('menus.cost')} ${thb(c.costWithWaste)}</div>
       <div class="menu-card-actions">
-        <button class="btn btn-secondary btn-sm" onclick="app.openCostModal('${m.id}')" title="ดูต้นทุน">🧮</button>
+        <button class="btn btn-secondary btn-sm" onclick="app.openCostModal('${m.id}')" title="${t('menus.cost_title')}">🧮</button>
         <button class="btn btn-secondary btn-sm" onclick="app.openEditMenu('${m.id}')">✏️</button>
         <button class="btn btn-danger btn-sm"    onclick="app.confirmDeleteMenu('${m.id}','${m.name.replace(/'/g, "\\'")}')">🗑️</button>
       </div>
@@ -40,7 +40,7 @@ export function renderMenus() {
 }
 
 export function confirmDeleteMenu(id, name) {
-  if (confirm(`ลบเมนู "${name}" ?`)) {
+  if (confirm(t('menus.confirm_delete', { name }))) {
     deleteMenu(id);
     renderMenus();
   }
@@ -72,7 +72,7 @@ export function closeMenuModal() {
 
 export function saveMenu(onSaved) {
   const m = _collectModalData();
-  if (!m.name) { alert('กรุณาใส่ชื่อเมนู'); return; }
+  if (!m.name) { alert(t('menus.required_name')); return; }
   editingMenuId ? updateMenu(editingMenuId, m) : addMenu(m);
   closeMenuModal();
   renderMenus();
@@ -107,9 +107,9 @@ export function updateModalCalc() {
   const m = _collectModalData();
   const c = calcMenu(m);
   document.getElementById('modal-calc').innerHTML = `
-    <div class="calc-line"><span>ต้นทุนวัตถุดิบ</span><span>${thb(c.rawCost)}</span></div>
-    <div class="calc-line"><span>+ ต้นทุนแฝงรวม</span><span>${thb(c.hiddenTotal)}</span></div>
-    <div class="calc-line total-line"><span>ต้นทุนรวม/แก้ว</span><span>${thb(c.baseCost)}</span></div>
+    <div class="calc-line"><span>${t('menus.raw_cost')}</span><span>${thb(c.rawCost)}</span></div>
+    <div class="calc-line"><span>${t('menus.hidden_total')}</span><span>${thb(c.hiddenTotal)}</span></div>
+    <div class="calc-line total-line"><span>${t('menus.base_cost')}</span><span>${thb(c.baseCost)}</span></div>
     <div class="calc-line" style="color:#00B14F">
       <span><img src="assets/grab-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company1GP})</span>
       <span>${thb(c.c1IncVAT)}</span>
@@ -131,33 +131,38 @@ export function openCostModal(menuId) {
   if (!m) return;
   const c = calcMenu(m);
 
-  document.getElementById('cost-modal-title').textContent = `🧮 ต้นทุน — ${m.name}`;
+  document.getElementById('cost-modal-title').textContent = `${t('menus.cost_title')} — ${m.name}`;
   document.getElementById('cost-modal-body').innerHTML = `
     <div class="cost-section">
-      <div class="cost-row indent"><span>ต้นทุนวัตถุดิบ</span><span class="cost-val">${thb(c.rawCost)}</span></div>
+      <div class="cost-row indent"><span>${t('menus.raw_cost')}</span><span class="cost-val">${thb(c.rawCost)}</span></div>
       ${(m.hiddenCosts ?? []).filter(h => h.amount > 0).map(h =>
         `<div class="cost-row indent"><span>+ ${h.name}</span><span class="cost-val">${thb(h.amount)}</span></div>`
       ).join('')}
-      <div class="cost-row total"><span>ต้นทุนรวม/แก้ว</span><span class="cost-val">${thb(c.baseCost)}</span></div>
+      <div class="cost-row total"><span>${t('menus.base_cost')}</span><span class="cost-val">${thb(c.baseCost)}</span></div>
       <hr class="divider">
-      <div class="cost-row indent"><span>บรรจุภัณฑ์ + Waste ${m.packagingWaste}%</span><span class="cost-val">${thb(c.packagingWithWaste)}</span></div>
-      <div class="cost-row total"><span>ต้นทุนรวม Delivery</span><span class="cost-val">${thb(c.totalDeliveryCost)}</span></div>
+      <div class="cost-row indent"><span>${t('menus.pkg_waste_label')} ${m.packagingWaste}%</span><span class="cost-val">${thb(c.packagingWithWaste)}</span></div>
+      <div class="cost-row total"><span>${t('menus.delivery_cost')}</span><span class="cost-val">${thb(c.totalDeliveryCost)}</span></div>
       <hr class="divider">
       <div class="cost-row delivery">
         <span><img src="assets/grab-logo.svg" style="height:18px;vertical-align:middle;margin-right:6px">
-        (×${m.company1GP})<br><small class="text-sm">ก่อน VAT: ${thb(c.c1ExVAT)}</small></span>
+        (×${m.company1GP})<br><small class="text-sm">${t('menus.pre_vat')}: ${thb(c.c1ExVAT)}</small></span>
         <span class="cost-val fw-bold" style="font-size:17px">${thb(c.c1IncVAT)}</span>
       </div>
       <div class="cost-row delivery" style="margin-top:6px;background:#FFFDE7;border-color:#FFF176">
         <span><img src="assets/lineman-logo.svg" style="height:18px;vertical-align:middle;margin-right:6px">
-        (×${m.company2GP})<br><small class="text-sm">ก่อน VAT: ${thb(c.c2ExVAT)}</small></span>
+        (×${m.company2GP})<br><small class="text-sm">${t('menus.pre_vat')}: ${thb(c.c2ExVAT)}</small></span>
         <span class="cost-val fw-bold" style="font-size:17px">${thb(c.c2IncVAT)}</span>
       </div>
     </div>
     <hr class="divider" style="margin:14px 0">
-    <div class="card-title" style="margin-bottom:8px">รายละเอียดวัตถุดิบ</div>
+    <div class="card-title" style="margin-bottom:8px">${t('menus.ing_detail')}</div>
     <table class="data-table">
-      <thead><tr><th>#</th><th>วัตถุดิบ</th><th class="text-right">ที่ใช้/ทั้งหมด</th><th class="text-right">ต้นทุน</th></tr></thead>
+      <thead><tr>
+        <th>${t('menus.col_num')}</th>
+        <th>${t('menus.col_ing')}</th>
+        <th class="text-right">${t('menus.col_used_total')}</th>
+        <th class="text-right">${t('menus.col_cost')}</th>
+      </tr></thead>
       <tbody>
         ${m.ingredients.filter(i => i.name).map((ing, idx) => {
           const cost = ing.totalQty ? ing.totalPrice * (ing.usedQty / ing.totalQty) : 0;
@@ -184,7 +189,9 @@ function _emptyRow() {
 }
 
 function _openModal() {
-  document.getElementById('modal-title').textContent = editingMenuId ? '✏️ แก้ไขเมนู' : '+ เพิ่มเมนูใหม่';
+  document.getElementById('modal-title').textContent = editingMenuId
+    ? t('menus.edit_title')
+    : t('menus.add_new');
   _renderIngTable();
   _renderPkgTable();
   updateModalCalc();
@@ -217,10 +224,10 @@ function _renderIngTable() {
   document.getElementById('ing-tbody').innerHTML = modalIngredients.map((ing, i) => `
     <tr>
       <td>${i + 1}</td>
-      <td><input type="text"   value="${ing.name     || ''}" placeholder="ชื่อวัตถุดิบ" onchange="app.onIngChange(${i},'name',this.value)"></td>
-      <td><input type="number" value="${ing.totalQty || ''}" placeholder="0"            onchange="app.onIngChange(${i},'totalQty',+this.value)"></td>
-      <td><input type="number" value="${ing.totalPrice|| ''}" placeholder="0"           onchange="app.onIngChange(${i},'totalPrice',+this.value)"></td>
-      <td><input type="number" value="${ing.usedQty  || ''}" placeholder="0"            onchange="app.onIngChange(${i},'usedQty',+this.value)"></td>
+      <td><input type="text"   value="${ing.name     || ''}" placeholder="${t('menus.ing_ph')}" onchange="app.onIngChange(${i},'name',this.value)"></td>
+      <td><input type="number" value="${ing.totalQty || ''}" placeholder="0"                    onchange="app.onIngChange(${i},'totalQty',+this.value)"></td>
+      <td><input type="number" value="${ing.totalPrice|| ''}" placeholder="0"                   onchange="app.onIngChange(${i},'totalPrice',+this.value)"></td>
+      <td><input type="number" value="${ing.usedQty  || ''}" placeholder="0"                    onchange="app.onIngChange(${i},'usedQty',+this.value)"></td>
       <td><button class="del-btn" onclick="app.removeIng(${i})">✕</button></td>
     </tr>`).join('');
 }
@@ -229,10 +236,10 @@ function _renderPkgTable() {
   document.getElementById('pkg-tbody').innerHTML = modalPackaging.map((pkg, i) => `
     <tr>
       <td>${i + 1}</td>
-      <td><input type="text"   value="${pkg.name     || ''}" placeholder="ชื่อบรรจุภัณฑ์" onchange="app.onPkgChange(${i},'name',this.value)"></td>
-      <td><input type="number" value="${pkg.totalQty || ''}" placeholder="0"              onchange="app.onPkgChange(${i},'totalQty',+this.value)"></td>
-      <td><input type="number" value="${pkg.totalPrice|| ''}" placeholder="0"             onchange="app.onPkgChange(${i},'totalPrice',+this.value)"></td>
-      <td><input type="number" value="${pkg.usedQty  || ''}" placeholder="0"              onchange="app.onPkgChange(${i},'usedQty',+this.value)"></td>
+      <td><input type="text"   value="${pkg.name     || ''}" placeholder="${t('menus.pkg_ph')}" onchange="app.onPkgChange(${i},'name',this.value)"></td>
+      <td><input type="number" value="${pkg.totalQty || ''}" placeholder="0"                    onchange="app.onPkgChange(${i},'totalQty',+this.value)"></td>
+      <td><input type="number" value="${pkg.totalPrice|| ''}" placeholder="0"                   onchange="app.onPkgChange(${i},'totalPrice',+this.value)"></td>
+      <td><input type="number" value="${pkg.usedQty  || ''}" placeholder="0"                    onchange="app.onPkgChange(${i},'usedQty',+this.value)"></td>
       <td><button class="del-btn" onclick="app.removePkg(${i})">✕</button></td>
     </tr>`).join('');
 }
@@ -242,7 +249,7 @@ function _renderHiddenCostTable() {
   if (!tbody) return;
   tbody.innerHTML = modalHiddenCosts.map((h, i) => `
     <tr>
-      <td><input type="text"   class="hc-name"   value="${h.name   || ''}" placeholder="เช่น ค่าแรง"
+      <td><input type="text"   class="hc-name"   value="${h.name   || ''}" placeholder="${t('overhead.cost_ph')}"
                  onchange="app.onHiddenCostChange(${i},'name',this.value)"></td>
       <td><input type="number" class="hc-amount" value="${h.amount > 0 ? h.amount : ''}" placeholder="0.00" step="0.01" min="0"
                  onchange="app.onHiddenCostChange(${i},'amount',+this.value)"></td>

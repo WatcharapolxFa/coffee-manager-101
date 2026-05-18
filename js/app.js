@@ -1,3 +1,4 @@
+import { getLang, setLang as i18nSetLang, applyStatic } from './i18n.js';
 import { seedIfEmpty } from './storage.js';
 import { renderDashboard }  from './views/dashboard.js';
 import { renderMenus, openAddMenu, openEditMenu, closeMenuModal, saveMenu,
@@ -11,6 +12,8 @@ import { renderSales, renderPosGrid, setChannel, tapMenu, updateCartQty,
 import { renderReport, showReport } from './views/report.js';
 import { renderOverhead, addOverheadRow, removeOverheadRow,
          onOverheadChange, saveAllOverhead } from './views/overhead.js';
+import { renderPurchases, openAddPurchase, closePurchaseModal, savePurchase,
+         removePurchaseEntry, onPurchaseDateChange } from './views/purchases.js';
 
 let currentTab = 'dashboard';
 
@@ -27,12 +30,18 @@ function navigate(tab) {
     menus:     renderMenus,
     overhead:  renderOverhead,
     report:    renderReport,
+    purchases: renderPurchases,
   };
   renders[tab]?.();
 }
 
+function setLang(lang) {
+  i18nSetLang(lang);
+}
+
 window.app = {
   navigate,
+  setLang,
   openAddMenu, openEditMenu, closeMenuModal,
   saveMenu: () => saveMenu(() => {
     if (currentTab === 'sales') renderPosGrid();
@@ -44,16 +53,22 @@ window.app = {
   addOverheadRow, removeOverheadRow, onOverheadChange, saveAllOverhead,
   setChannel, tapMenu, updateCartQty, removeFromCart,
   clearCart, confirmOrder, removeSaleEntry,
+  openAddPurchase, closePurchaseModal, savePurchase, removePurchaseEntry,
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   seedIfEmpty();
+
+  // Apply saved language on load
+  document.documentElement.lang = getLang();
+  applyStatic();
 
   document.querySelectorAll('.nav-tab').forEach(btn => {
     btn.addEventListener('click', () => navigate(btn.dataset.tab));
   });
 
   document.getElementById('sales-date')?.addEventListener('change', onSalesDateChange);
+  document.getElementById('purchase-date')?.addEventListener('change', onPurchaseDateChange);
 
   ['menu-vat', 'pkg-waste', 'company1-gp', 'company2-gp', 'menu-name']
     .forEach(id => document.getElementById(id)?.addEventListener('input', updateModalCalc));
@@ -70,6 +85,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   navigate('dashboard');
+});
+
+// Re-render current tab when language changes
+window.addEventListener('langchange', () => {
+  applyStatic();
+  const renders = {
+    dashboard: renderDashboard,
+    sales:     renderSales,
+    menus:     renderMenus,
+    overhead:  renderOverhead,
+    report:    renderReport,
+    purchases: renderPurchases,
+  };
+  renders[currentTab]?.();
 });
 
 // PWA: Register Service Worker

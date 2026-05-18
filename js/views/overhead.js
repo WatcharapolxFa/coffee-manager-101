@@ -2,6 +2,7 @@ import { getMenus, getMenuById, updateMenu } from '../storage.js';
 import { calcMenu } from '../calculator.js';
 import { thb, menuIcon } from '../utils.js';
 import { DEFAULTS } from '../config.js';
+import { t } from '../i18n.js';
 
 let editingAll = {};
 
@@ -11,7 +12,7 @@ export function renderOverhead() {
   if (!container) return;
 
   if (menus.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">💰</div><p>ยังไม่มีเมนู กรุณาเพิ่มเมนูก่อน</p></div>';
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">💰</div><p>${t('overhead.no_menus')}</p></div>`;
     return;
   }
 
@@ -35,10 +36,14 @@ function _menuSection(m, idx) {
     </div>
 
     <table class="hc-table" style="margin-bottom:8px">
-      <thead><tr><th>รายการ</th><th style="text-align:right">฿/แก้ว</th><th></th></tr></thead>
+      <thead><tr>
+        <th>${t('overhead.col_item')}</th>
+        <th style="text-align:right">${t('overhead.col_cup')}</th>
+        <th></th>
+      </tr></thead>
       <tbody id="oh-tbody-${m.id}"></tbody>
     </table>
-    <button class="btn btn-secondary btn-sm" onclick="app.addOverheadRow('${m.id}')">+ เพิ่มรายการ</button>
+    <button class="btn btn-secondary btn-sm" onclick="app.addOverheadRow('${m.id}')">${t('overhead.add_row')}</button>
 
     <div class="oh-summary" id="oh-summary-${m.id}"></div>
   </div>`;
@@ -51,7 +56,7 @@ function _renderRows(menuId) {
   tbody.innerHTML = costs.map((h, i) => `
     <tr>
       <td><input class="overhead-name" type="text"
-          value="${h.name || ''}" placeholder="เช่น ค่าแรง"
+          value="${h.name || ''}" placeholder="${t('overhead.cost_ph')}"
           onchange="app.onOverheadChange('${menuId}',${i},'name',this.value)"></td>
       <td><input class="overhead-amt" type="number"
           value="${h.amount > 0 ? h.amount : ''}" placeholder="0.00" step="0.01" min="0"
@@ -103,13 +108,13 @@ function _updateSummary(menuId) {
   el.innerHTML = `
     <div class="oh-summary-grid">
       <div class="oh-sum-row">
-        <span>ต้นทุนวัตถุดิบ</span><span>${thb(c.rawCost)}</span>
+        <span>${t('overhead.raw_cost')}</span><span>${thb(c.rawCost)}</span>
       </div>
       <div class="oh-sum-row">
-        <span>+ ต้นทุนแฝง</span><span>${thb(hiddenTotal)}</span>
+        <span>${t('overhead.hidden')}</span><span>${thb(hiddenTotal)}</span>
       </div>
       <div class="oh-sum-row oh-sum-total">
-        <span>รวม/แก้ว</span><span>${thb(c.baseCost)}</span>
+        <span>${t('overhead.total_cup')}</span><span>${thb(c.baseCost)}</span>
       </div>
       <div class="oh-sum-row oh-sum-price">
         <span><img src="assets/grab-logo.svg" style="height:13px;vertical-align:middle"></span>
@@ -125,8 +130,8 @@ function _updateSummary(menuId) {
 function _showSavedAll() {
   const btn = document.getElementById('overhead-save-all-btn');
   if (!btn) return;
-  const orig = btn.innerHTML;
-  btn.innerHTML = '✅ บันทึกแล้ว';
+  const orig = btn.textContent;
+  btn.textContent = t('overhead.saved');
   btn.disabled = true;
-  setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; }, 1800);
+  setTimeout(() => { btn.textContent = t('overhead.save_all'); btn.disabled = false; }, 1800);
 }

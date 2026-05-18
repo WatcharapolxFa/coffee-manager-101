@@ -1,6 +1,7 @@
 import { getSalesByMonth } from '../storage.js';
 import { thb, daysInMonth } from '../utils.js';
 import { renderDashChart } from '../components/charts.js';
+import { t } from '../i18n.js';
 
 export function renderDashboard() {
   const now   = new Date();
@@ -45,10 +46,10 @@ function _renderTopMenus(sales) {
   const MEDALS = ['🥇','🥈','🥉'];
   const el = document.getElementById('top-menus');
   el.innerHTML = sorted.length === 0
-    ? '<div class="empty-state" style="padding:16px"><p>ยังไม่มีข้อมูลยอดขาย</p></div>'
+    ? `<div class="empty-state" style="padding:16px"><p>${t('dash.no_sales')}</p></div>`
     : sorted.map(([name, v], i) => `
         <div class="top-menu-item">
           <span><span class="top-menu-rank">${MEDALS[i]}</span>${name}</span>
-          <span class="fw-bold color-brown">${v.cups} แก้ว · ${thb(v.revenue)}</span>
+          <span class="fw-bold color-brown">${v.cups} ${t('dash.cups_unit')} · ${thb(v.revenue)}</span>
         </div>`).join('');
 }

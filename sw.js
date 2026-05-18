@@ -1,10 +1,11 @@
-const CACHE_NAME = 'coffee-manager-v1';
+const CACHE_NAME = 'coffee-manager-v3';
 
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/css/style.css',
   '/js/app.js',
+  '/js/i18n.js',
   '/js/config.js',
   '/js/utils.js',
   '/js/storage.js',
@@ -15,6 +16,7 @@ const STATIC_ASSETS = [
   '/js/views/sales.js',
   '/js/views/report.js',
   '/js/views/overhead.js',
+  '/js/views/purchases.js',
   '/assets/grab-logo.svg',
   '/assets/lineman-logo.svg',
   '/assets/shop-logo.svg',

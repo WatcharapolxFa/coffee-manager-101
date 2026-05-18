@@ -61,6 +61,36 @@ export function getSalesByMonth(year, month) {
   return getSales().filter(s => s.date.startsWith(prefix));
 }
 
+export function getPurchases() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.purchases)) || []; }
+  catch { return []; }
+}
+
+function savePurchases(items) {
+  localStorage.setItem(STORAGE_KEYS.purchases, JSON.stringify(items));
+}
+
+export function addPurchase(purchase) {
+  const items = getPurchases();
+  const newItem = { ...purchase, id: genId() };
+  items.push(newItem);
+  savePurchases(items);
+  return newItem;
+}
+
+export function deletePurchase(id) {
+  savePurchases(getPurchases().filter(p => p.id !== id));
+}
+
+export function getPurchasesByDate(dateStr) {
+  return getPurchases().filter(p => p.date === dateStr);
+}
+
+export function getPurchasesByMonth(year, month) {
+  const prefix = `${year}-${String(month).padStart(2, '0')}`;
+  return getPurchases().filter(p => p.date.startsWith(prefix));
+}
+
 export function seedIfEmpty() {
   if (getMenus().length > 0) return;
   addMenu({

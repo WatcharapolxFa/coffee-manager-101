@@ -1,6 +1,7 @@
 import { getMenus, getMenuById, addSale, deleteSale, getSalesByDate } from '../storage.js';
 import { getUnitPrice, getUnitCost }   from '../calculator.js';
 import { thb, todayStr, menuIcon, channelLabel } from '../utils.js';
+import { t } from '../i18n.js';
 
 let posCart    = {};
 let posChannel = 'delivery1';
@@ -21,7 +22,7 @@ export function renderPosGrid() {
   if (!grid) return;
 
   if (menus.length === 0) {
-    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">☕</div><p>ยังไม่มีเมนู กรุณาเพิ่มเมนูก่อน</p></div>';
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">☕</div><p>${t('sales.no_menus')}</p></div>`;
     return;
   }
 
@@ -77,7 +78,7 @@ export function renderSalesHistory() {
   if (!listEl) return;
 
   if (sales.length === 0) {
-    listEl.innerHTML = '<div class="text-sm text-center" style="padding:16px;color:var(--text-light)">ยังไม่มียอดขาย</div>';
+    listEl.innerHTML = `<div class="text-sm text-center" style="padding:16px;color:var(--text-light)">${t('sales.no_sales')}</div>`;
     if (totalEl) totalEl.textContent = '฿0.00';
     return;
   }
@@ -87,11 +88,11 @@ export function renderSalesHistory() {
     <div class="history-item">
       <div class="history-item-left">
         <div class="history-item-name">${s.menuName} × ${s.qty}</div>
-        <div class="history-item-sub">${channelLabel(s.channel)} · ${thb(s.unitPrice)}/แก้ว</div>
+        <div class="history-item-sub">${channelLabel(s.channel)} · ${thb(s.unitPrice)}${t('sales.per_cup')}</div>
       </div>
       <div class="history-item-right">
         <div class="history-item-rev">${thb(s.revenue)}</div>
-        <button class="btn btn-danger btn-sm" style="margin-top:4px" onclick="app.removeSaleEntry('${s.id}')">ลบ</button>
+        <button class="btn btn-danger btn-sm" style="margin-top:4px" onclick="app.removeSaleEntry('${s.id}')">${t('sales.delete')}</button>
       </div>
     </div>`).join('');
   if (totalEl) totalEl.textContent = thb(totalRev);
@@ -154,7 +155,7 @@ export function confirmOrder() {
 }
 
 export function removeSaleEntry(id) {
-  if (confirm('ลบรายการนี้?')) {
+  if (confirm(t('sales.confirm_delete'))) {
     deleteSale(id);
     renderSalesHistory();
   }

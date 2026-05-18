@@ -1,6 +1,7 @@
 import { getSalesByMonth } from '../storage.js';
 import { thb, daysInMonth } from '../utils.js';
 import { renderDailyBarChart, renderPieChart } from '../components/charts.js';
+import { t } from '../i18n.js';
 
 export function renderReport() {
   const now      = new Date();
@@ -17,7 +18,7 @@ export function showReport() {
   const sales = getSalesByMonth(year, month);
 
   if (sales.length === 0) {
-    document.getElementById('report-charts').innerHTML  = '<div class="empty-state"><div class="empty-icon">📈</div><p>ยังไม่มีข้อมูลยอดขายในเดือนนี้</p></div>';
+    document.getElementById('report-charts').innerHTML  = `<div class="empty-state"><div class="empty-icon">📈</div><p>${t('report.no_sales')}</p></div>`;
     document.getElementById('report-table-body').innerHTML = '';
     document.getElementById('report-summary').innerHTML = '';
     return;
@@ -39,17 +40,17 @@ function _renderSummaryCards(sales) {
         <div class="stat-card">
           <div class="stat-icon">💰</div>
           <div class="stat-val">${thb(totalRevenue)}</div>
-          <div class="stat-label">รายได้รวม</div>
+          <div class="stat-label">${t('report.total_revenue')}</div>
         </div>
         <div class="stat-card">
           <div class="stat-icon">☕</div>
           <div class="stat-val">${totalCups}</div>
-          <div class="stat-label">แก้วรวม</div>
+          <div class="stat-label">${t('report.total_cups')}</div>
         </div>
         <div class="stat-card" style="border-left-color:#2E7D32">
           <div class="stat-icon">📊</div>
           <div class="stat-val" style="color:#2E7D32">${thb(totalRevenue - totalCost)}</div>
-          <div class="stat-label">กำไรโดยประมาณ</div>
+          <div class="stat-label">${t('report.est_profit')}</div>
         </div>
       </div>
     </div>`;
@@ -70,11 +71,11 @@ function _renderCharts(sales, year, month) {
 
   document.getElementById('report-charts').innerHTML = `
     <div class="card" style="margin-bottom:12px">
-      <div class="card-title">ยอดขายรายวัน (฿)</div>
+      <div class="card-title">${t('report.daily_sales')}</div>
       <div class="chart-box-tall"><canvas id="report-bar-chart"></canvas></div>
     </div>
     <div class="card">
-      <div class="card-title">สัดส่วนยอดขายตามเมนู</div>
+      <div class="card-title">${t('report.by_menu')}</div>
       <div class="chart-box-tall"><canvas id="report-pie-chart"></canvas></div>
     </div>`;
 
