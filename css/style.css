@@ -303,10 +303,20 @@ body {
   border: 1px solid var(--cream-dark);
   position: relative;
 }
-.menu-card-name { font-size: 15px; font-weight: 700; color: var(--brown-dark); margin-bottom: 6px; }
+.menu-card-icon { font-size: 36px; text-align: center; margin-bottom: 10px; }
+.menu-card-name { font-size: 15px; font-weight: 700; color: var(--brown-dark); margin-bottom: 12px; }
+.menu-card-cost-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+.menu-card-cost-label { font-size: 11px; color: var(--text-light); font-weight: 500; }
 .menu-card-price { font-size: 22px; font-weight: 700; color: var(--brown); }
-.menu-card-sub { font-size: 11px; color: var(--text-light); }
-.menu-card-actions { display: flex; gap: 6px; margin-top: 10px; }
+.menu-card-actions { display: flex; gap: 6px; }
 
 /* ---- COST BREAKDOWN ---- */
 .cost-section { margin-bottom: 14px; }

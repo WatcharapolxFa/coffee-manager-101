@@ -22,9 +22,12 @@ export function renderMenus() {
     const c    = calcMenu(m);
     const icon = menuIcon(m.name, i);
     return `<div class="menu-card">
-      <div style="font-size:32px;margin-bottom:6px;text-align:center">${icon}</div>
+      <div class="menu-card-icon">${icon}</div>
       <div class="menu-card-name">${m.name}</div>
-      <div class="menu-card-price">${thb(c.totalDeliveryCost)}</div>
+      <div class="menu-card-cost-row">
+        <span class="menu-card-cost-label">🧾 ต้นทุนรวม / แก้ว</span>
+        <span class="menu-card-price">${thb(c.totalDeliveryCost)}</span>
+      </div>
       <div class="menu-card-actions">
         <button class="btn btn-secondary btn-sm" onclick="app.openCostModal('${m.id}')" title="${t('menus.cost_title')}">🧮</button>
         <button class="btn btn-secondary btn-sm" onclick="app.openEditMenu('${m.id}')">✏️</button>
