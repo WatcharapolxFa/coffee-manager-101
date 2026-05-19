@@ -1,5 +1,5 @@
 import { getLang, setLang as i18nSetLang, applyStatic } from './i18n.js';
-import { seedIfEmpty } from './storage.js';
+import { seedIfEmpty, exportData, importData, loadSeedMenus } from './storage.js';
 import { renderDashboard }  from './views/dashboard.js';
 import { renderMenus, openAddMenu, openEditMenu, closeMenuModal, saveMenu,
          confirmDeleteMenu, openCostModal, closeCostModal,
@@ -9,12 +9,10 @@ import { renderMenus, openAddMenu, openEditMenu, closeMenuModal, saveMenu,
 import { renderSales, renderPosGrid, setChannel, tapMenu, updateCartQty,
          removeFromCart, clearCart, confirmOrder, removeSaleEntry,
          onSalesDateChange } from './views/sales.js';
-import { renderReport, showReport } from './views/report.js';
 import { renderOverhead, setOverheadMonth, addOverheadRow, removeOverheadRow,
          onOverheadChange, saveAllOverhead } from './views/overhead.js';
 import { renderPurchases, openAddPurchase, closePurchaseModal, savePurchase,
          removePurchaseEntry, onPurchaseDateChange } from './views/purchases.js';
-import { exportData, importData } from './storage.js';
 
 let currentTab = 'dashboard';
 
@@ -30,7 +28,6 @@ function navigate(tab) {
     sales:     renderSales,
     menus:     renderMenus,
     overhead:  renderOverhead,
-    report:    renderReport,
     purchases: renderPurchases,
   };
   renders[tab]?.();
@@ -74,12 +71,16 @@ window.app = {
       alert('เกิดข้อผิดพลาด: ' + err.message);
     }
   },
+  loadSeedMenus: () => {
+    if (!confirm('โหลดเมนูจาก template จะเขียนทับเมนูที่มีชื่อซ้ำ ยืนยันหรือไม่?')) return;
+    loadSeedMenus();
+    renderMenus();
+  },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   seedIfEmpty();
 
-  // Apply saved language on load
   document.documentElement.lang = getLang();
   applyStatic();
 
@@ -93,21 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ['menu-vat', 'pkg-waste', 'company1-gp', 'company2-gp', 'menu-name']
     .forEach(id => document.getElementById(id)?.addEventListener('input', updateModalCalc));
 
-  document.getElementById('report-year')?.addEventListener('change', showReport);
-  document.getElementById('report-month')?.addEventListener('change', showReport);
-
-  const yearSel = document.getElementById('report-year');
-  if (yearSel) {
-    const y = new Date().getFullYear();
-    yearSel.innerHTML = [y - 1, y, y + 1]
-      .map(yr => `<option value="${yr}" ${yr === y ? 'selected' : ''}>${yr}</option>`)
-      .join('');
-  }
-
   navigate('dashboard');
 });
 
-// Re-render current tab when language changes
 window.addEventListener('langchange', () => {
   applyStatic();
   const renders = {
@@ -115,13 +104,11 @@ window.addEventListener('langchange', () => {
     sales:     renderSales,
     menus:     renderMenus,
     overhead:  renderOverhead,
-    report:    renderReport,
     purchases: renderPurchases,
   };
   renders[currentTab]?.();
 });
 
-// PWA: Register Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')

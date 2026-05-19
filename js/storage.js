@@ -1,5 +1,6 @@
-import { STORAGE_KEYS, DEFAULTS } from './config.js';
+import { STORAGE_KEYS } from './config.js';
 import { genId } from './utils.js';
+import { SEED_MENUS } from './data/menus-seed.js';
 
 export function getMenus() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.menus)) || []; }
@@ -153,26 +154,16 @@ export function importData(file) {
 
 export function seedIfEmpty() {
   if (getMenus().length > 0) return;
-  addMenu({
-    name: 'Iced Cafe Latte',
-    ingredients: [
-      { name: 'เมล็ดกาแฟคั่วเข้ม (Dark Roasted)', totalQty: 1000, totalPrice: 550, usedQty: 17 },
-      { name: 'นมสด',      totalQty: 2000, totalPrice: 99.75, usedQty: 150 },
-      { name: 'แก้ว',      totalQty: 1,    totalPrice: 1,     usedQty: 1 },
-      { name: 'หลอด',      totalQty: 200,  totalPrice: 48,    usedQty: 1 },
-      { name: 'ฝาเรียบ',   totalQty: 1,    totalPrice: 1,     usedQty: 1 },
-      { name: 'น้ำแข็ง',  totalQty: 1,    totalPrice: 1,     usedQty: 1 },
-      { name: 'สติ๊กเกอร์', totalQty: 1,   totalPrice: 1,     usedQty: 1 },
-      { name: 'น้ำเชื่อม', totalQty: 1000, totalPrice: 30,    usedQty: 15 },
-    ],
-    hiddenCosts:    DEFAULTS.hiddenCosts.map(c => ({ ...c })),
-    vat:            DEFAULTS.vat,
-    packaging: [
-      { name: 'ขวดเครื่องดื่ม',    totalQty: 50,  totalPrice: 60, usedQty: 1 },
-      { name: 'กระดาษปิดปากแก้ว', totalQty: 200, totalPrice: 65, usedQty: 1 },
-    ],
-    packagingWaste: DEFAULTS.packagingWaste,
-    company1GP:     DEFAULTS.company1GP,
-    company2GP:     DEFAULTS.company2GP,
+  SEED_MENUS.forEach(m => addMenu({ ...m }));
+}
+
+export function loadSeedMenus() {
+  const existing = getMenus();
+  const merged = SEED_MENUS.map(seed => {
+    const match = existing.find(m => m.name === seed.name);
+    return match
+      ? { ...match, ...seed }
+      : { ...seed, id: genId() };
   });
+  saveMenus(merged);
 }

@@ -60,10 +60,6 @@
     <div class="tab-icon">💰</div>
     <span data-i18n="nav.overhead">ต้นทุนแฝง</span>
   </button>
-  <button class="nav-tab" data-tab="report">
-    <div class="tab-icon">📈</div>
-    <span data-i18n="nav.report">รายงาน</span>
-  </button>
   <button class="nav-tab" data-tab="purchases">
     <div class="tab-icon">🛒</div>
     <span data-i18n="nav.purchases">ซื้อวัตถุดิบ</span>
@@ -146,7 +142,10 @@
   <div id="tab-menus" class="tab-panel">
     <div class="section-header">
       <span class="section-title" data-i18n="menus.all_menus">เมนูทั้งหมด</span>
-      <button class="btn btn-primary" onclick="app.openAddMenu()" data-i18n="menus.add">+ เพิ่มเมนู</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary btn-sm" onclick="app.loadSeedMenus()" title="โหลดเมนูจาก template ใน code">🔄 template</button>
+        <button class="btn btn-primary btn-sm" onclick="app.openAddMenu()" data-i18n="menus.add">+ เพิ่มเมนู</button>
+      </div>
     </div>
     <div id="menu-grid" class="menu-grid"></div>
   </div>
@@ -161,47 +160,7 @@
     </button>
   </div>
 
-  <!-- TAB 5: REPORT -->
-  <div id="tab-report" class="tab-panel">
-    <div class="card">
-      <div class="month-picker">
-        <select id="report-month" class="form-control">
-          <option value="1"  data-i18n="month.1">มกราคม</option>
-          <option value="2"  data-i18n="month.2">กุมภาพันธ์</option>
-          <option value="3"  data-i18n="month.3">มีนาคม</option>
-          <option value="4"  data-i18n="month.4">เมษายน</option>
-          <option value="5"  data-i18n="month.5">พฤษภาคม</option>
-          <option value="6"  data-i18n="month.6">มิถุนายน</option>
-          <option value="7"  data-i18n="month.7">กรกฎาคม</option>
-          <option value="8"  data-i18n="month.8">สิงหาคม</option>
-          <option value="9"  data-i18n="month.9">กันยายน</option>
-          <option value="10" data-i18n="month.10">ตุลาคม</option>
-          <option value="11" data-i18n="month.11">พฤศจิกายน</option>
-          <option value="12" data-i18n="month.12">ธันวาคม</option>
-        </select>
-        <select id="report-year" class="form-control" style="max-width:100px"></select>
-      </div>
-    </div>
-    <div id="report-summary"></div>
-    <div id="report-charts"></div>
-    <div class="card" style="margin-top:0">
-      <div class="card-title" data-i18n="report.summary">สรุปตามเมนู</div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th data-i18n="report.col_menu">เมนู</th>
-            <th class="text-center" data-i18n="report.col_cups">แก้ว</th>
-            <th class="text-right"  data-i18n="report.col_revenue">รายได้</th>
-            <th class="text-right"  data-i18n="report.col_cost">ต้นทุน</th>
-            <th class="text-right"  data-i18n="report.col_profit">กำไร</th>
-          </tr>
-        </thead>
-        <tbody id="report-table-body"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- TAB 6: PURCHASES -->
+  <!-- TAB 5: PURCHASES -->
   <div id="tab-purchases" class="tab-panel">
     <div class="pos-topbar">
       <input type="date" id="purchase-date" class="form-control pos-date">
