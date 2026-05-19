@@ -24,12 +24,7 @@ export function renderMenus() {
     return `<div class="menu-card">
       <div style="font-size:32px;margin-bottom:6px;text-align:center">${icon}</div>
       <div class="menu-card-name">${m.name}</div>
-      <div class="menu-card-price">${thb(c.c1IncVAT)}</div>
-      <div class="menu-card-sub" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-        <img src="assets/grab-logo.svg" style="height:13px"> ${thb(c.c1IncVAT)} &nbsp;·&nbsp;
-        <img src="assets/lineman-logo.svg" style="height:13px"> ${thb(c.c2IncVAT)}
-      </div>
-      <div class="menu-card-sub" style="margin-top:2px">${t('menus.cost')} ${thb(c.costWithWaste)}</div>
+      <div class="menu-card-price">${thb(c.totalDeliveryCost)}</div>
       <div class="menu-card-actions">
         <button class="btn btn-secondary btn-sm" onclick="app.openCostModal('${m.id}')" title="${t('menus.cost_title')}">🧮</button>
         <button class="btn btn-secondary btn-sm" onclick="app.openEditMenu('${m.id}')">✏️</button>
