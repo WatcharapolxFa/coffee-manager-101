@@ -5,7 +5,7 @@ export const DEFAULTS = {
     { name: 'ค่าน้ำ ไฟ', amount: 0 },
     { name: 'การตลาด',   amount: 0 },
   ],
-  vat: 7,
+  vat: 30,
   packagingWaste: 5,
   company1GP: 1.5,
   company2GP: 1.25,

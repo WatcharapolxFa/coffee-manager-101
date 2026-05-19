@@ -27,11 +27,10 @@ export function calcMenu(menu) {
 
   const totalDeliveryCost = baseCost + packagingWithWaste;
 
-  const vatRate  = 1 + vat / 100;
   const c1ExVAT  = totalDeliveryCost * company1GP;
-  const c1IncVAT = c1ExVAT * vatRate;
+  const c1IncVAT = c1ExVAT + vat;
   const c2ExVAT  = totalDeliveryCost * company2GP;
-  const c2IncVAT = c2ExVAT * vatRate;
+  const c2IncVAT = c2ExVAT + vat;
 
   return {
     rawCost, hiddenTotal, baseCost,
