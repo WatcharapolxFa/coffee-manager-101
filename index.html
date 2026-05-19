@@ -12,19 +12,29 @@
   <link rel="icon" type="image/svg+xml" href="assets/shop-logo.svg">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* inline overrides for components rendered by JS views */
+    #pos-cart-total-val { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 28px; letter-spacing: -0.025em; color: #fff; }
+    #sales-day-total, #purchase-day-total { font-family: 'Fraunces', Georgia, serif; }
+    #stat-revenue, #stat-cups, #stat-profit { font-family: 'Fraunces', Georgia, serif; }
+  </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header class="app-header">
-  <img src="assets/shop-logo.svg" class="shop-logo" alt="RADIANT Coffee & Bakery">
-  <div class="header-right">
-    <div class="data-actions">
-      <button class="data-btn" onclick="app.exportData()" title="Export ข้อมูล">⬇ Export</button>
-      <button class="data-btn" onclick="app.importData()" title="Import ข้อมูล">⬆ Import</button>
-      <input id="import-file-input" type="file" accept=".json" style="display:none"
-             onchange="app.handleImportFile(this)">
+  <div class="app-header__logo">
+    <div class="logo-mark">R</div>
+    <div class="logo-text">
+      <div class="logo-text__name">RADIANT</div>
+      <div class="logo-text__sub">Coffee · Bakery</div>
     </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="app.exportData()" title="Export ข้อมูล">⬇</button>
+    <button class="icon-btn" onclick="app.importData()" title="Import ข้อมูล">⬆</button>
+    <input id="import-file-input" type="file" accept=".json" style="display:none"
+           onchange="app.handleImportFile(this)">
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="th" onclick="app.setLang('th')">TH</button>
       <button class="lang-btn"        data-lang="en" onclick="app.setLang('en')">EN</button>
@@ -32,14 +42,32 @@
   </div>
 </header>
 
-<!-- NAV TABS -->
-<nav class="nav-tabs">
-  <button class="nav-tab" data-tab="dashboard">📊<br><span data-i18n="nav.dashboard">ภาพรวม</span></button>
-  <button class="nav-tab" data-tab="sales">📝<br><span data-i18n="nav.sales">บันทึกขาย</span></button>
-  <button class="nav-tab" data-tab="menus">☕<br><span data-i18n="nav.menus">เมนู</span></button>
-  <button class="nav-tab" data-tab="overhead">💰<br><span data-i18n="nav.overhead">ต้นทุนแฝง</span></button>
-  <button class="nav-tab" data-tab="report">📈<br><span data-i18n="nav.report">รายงาน</span></button>
-  <button class="nav-tab" data-tab="purchases">🛒<br><span data-i18n="nav.purchases">ซื้อวัตถุดิบ</span></button>
+<!-- BOTTOM TAB BAR -->
+<nav class="tabbar">
+  <button class="nav-tab" data-tab="dashboard">
+    <div class="tab-icon">📊</div>
+    <span data-i18n="nav.dashboard">ภาพรวม</span>
+  </button>
+  <button class="nav-tab" data-tab="sales">
+    <div class="tab-icon">📝</div>
+    <span data-i18n="nav.sales">บันทึกขาย</span>
+  </button>
+  <button class="nav-tab" data-tab="menus">
+    <div class="tab-icon">☕</div>
+    <span data-i18n="nav.menus">เมนู</span>
+  </button>
+  <button class="nav-tab" data-tab="overhead">
+    <div class="tab-icon">💰</div>
+    <span data-i18n="nav.overhead">ต้นทุนแฝง</span>
+  </button>
+  <button class="nav-tab" data-tab="report">
+    <div class="tab-icon">📈</div>
+    <span data-i18n="nav.report">รายงาน</span>
+  </button>
+  <button class="nav-tab" data-tab="purchases">
+    <div class="tab-icon">🛒</div>
+    <span data-i18n="nav.purchases">ซื้อวัตถุดิบ</span>
+  </button>
 </nav>
 
 <!-- MAIN CONTENT -->
@@ -48,19 +76,18 @@
   <!-- TAB 1: DASHBOARD -->
   <div id="tab-dashboard" class="tab-panel">
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">💰</div>
-        <div class="stat-val" id="stat-revenue">฿0.00</div>
+      <div class="stat-card stat-card--feature">
         <div class="stat-label" data-i18n="dash.monthly_revenue">ยอดขายเดือนนี้</div>
+        <div class="stat-val" id="stat-revenue">฿0</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">☕</div>
         <div class="stat-val" id="stat-cups">0</div>
         <div class="stat-label" data-i18n="dash.cups_sold">แก้วที่ขาย</div>
       </div>
-      <div class="stat-card" style="border-left-color:#2E7D32">
+      <div class="stat-card">
         <div class="stat-icon">📊</div>
-        <div class="stat-val" id="stat-profit" style="color:#2E7D32">฿0.00</div>
+        <div class="stat-val" id="stat-profit">฿0</div>
         <div class="stat-label" data-i18n="dash.est_profit">กำไรโดยประมาณ</div>
       </div>
     </div>
