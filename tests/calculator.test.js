@@ -104,6 +104,11 @@ describe('getUnitPrice', () => {
     expect(getUnitPrice(ICE_LATTE, 'delivery2')).toBeCloseTo(r.c2IncVAT, 6);
   });
 
+  it('returns instorePrice for instore', () => {
+    const r = calcMenu(ICE_LATTE);
+    expect(getUnitPrice(ICE_LATTE, 'instore')).toBeCloseTo(r.instorePrice, 6);
+  });
+
   it('defaults to c1IncVAT for unknown channel', () => {
     expect(getUnitPrice(ICE_LATTE, 'unknown')).toBe(getUnitPrice(ICE_LATTE, 'delivery1'));
   });

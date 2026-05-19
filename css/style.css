@@ -557,14 +557,17 @@ html, body {
   filter: grayscale(30%);
   touch-action: manipulation;
 }
-.ch-btn:hover { opacity: 0.8; border-color: #00B14F; filter: none; }
+.ch-btn:hover { opacity: 0.8; filter: none; }
 .ch-btn.active {
-  border-color: #00B14F;
   opacity: 1;
   filter: none;
+  border-color: #00B14F;
   box-shadow: 0 2px 8px rgba(0,177,79,0.20);
   background: #F0FFF6;
 }
+.ch-btn--instore { font-size: 13px; font-weight: 600; color: var(--ink); gap: 4px; }
+.ch-btn--instore:hover { border-color: var(--ink); }
+.ch-btn--instore.active { border-color: var(--ink); background: var(--surface-2); box-shadow: var(--shadow-sm); }
 .ch-logo { height: 30px; width: auto; display: block; pointer-events: none; }
 
 /* POS menu grid */

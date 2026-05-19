@@ -106,7 +106,10 @@
     <div class="pos-topbar">
       <input type="date" id="sales-date" class="form-control pos-date">
       <div class="channel-toggle">
-        <button class="ch-btn active" data-ch="delivery1" onclick="app.setChannel('delivery1')">
+        <button class="ch-btn ch-btn--instore active" data-ch="instore" onclick="app.setChannel('instore')">
+          🏪 หน้าร้าน
+        </button>
+        <button class="ch-btn" data-ch="delivery1" onclick="app.setChannel('delivery1')">
           <img src="assets/grab-logo.svg" class="ch-logo" alt="Grab">
         </button>
         <button class="ch-btn" data-ch="delivery2" onclick="app.setChannel('delivery2')">

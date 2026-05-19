@@ -27,22 +27,26 @@ export function calcMenu(menu) {
 
   const totalDeliveryCost = baseCost + packagingWithWaste;
 
-  const c1ExVAT  = totalDeliveryCost * company1GP;
-  const c1IncVAT = c1ExVAT + vat;
-  const c2ExVAT  = totalDeliveryCost * company2GP;
-  const c2IncVAT = c2ExVAT + vat;
+  const c1ExVAT      = totalDeliveryCost * company1GP;
+  const c1IncVAT     = c1ExVAT + vat;
+  const c2ExVAT      = totalDeliveryCost * company2GP;
+  const c2IncVAT     = c2ExVAT + vat;
+  const instorePrice = totalDeliveryCost + vat;
 
   return {
     rawCost, hiddenTotal, baseCost,
     packagingRaw, packagingWithWaste, totalDeliveryCost,
     c1ExVAT, c1IncVAT,
     c2ExVAT, c2IncVAT,
+    instorePrice,
   };
 }
 
 export function getUnitPrice(menu, channel) {
   const c = calcMenu(menu);
-  return channel === 'delivery2' ? c.c2IncVAT : c.c1IncVAT;
+  if (channel === 'delivery2') return c.c2IncVAT;
+  if (channel === 'instore')   return c.instorePrice;
+  return c.c1IncVAT;
 }
 
 export function getUnitCost(menu) {

@@ -4,7 +4,7 @@ import { thb, todayStr, menuIcon, channelLabel } from '../utils.js';
 import { t } from '../i18n.js';
 
 let posCart    = {};
-let posChannel = 'delivery1';
+let posChannel = 'instore';
 
 export function renderSales() {
   const dateEl = document.getElementById('sales-date');

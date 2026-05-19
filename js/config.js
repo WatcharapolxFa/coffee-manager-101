@@ -12,6 +12,7 @@ export const DEFAULTS = {
 };
 
 export const CHANNELS = {
+  instore:   { label: 'หน้าร้าน', logo: null },
   delivery1: { label: 'Grab',     logo: 'assets/grab-logo.svg' },
   delivery2: { label: 'LINE MAN', logo: 'assets/lineman-logo.svg' },
 };

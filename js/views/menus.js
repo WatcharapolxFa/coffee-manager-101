@@ -107,17 +107,12 @@ export function updateModalCalc() {
   const m = _collectModalData();
   const c = calcMenu(m);
   document.getElementById('modal-calc').innerHTML = `
-    <div class="calc-line"><span>${t('menus.raw_cost')}</span><span>${thb(c.rawCost)}</span></div>
-    <div class="calc-line"><span>${t('menus.hidden_total')}</span><span>${thb(c.hiddenTotal)}</span></div>
-    <div class="calc-line total-line"><span>${t('menus.base_cost')}</span><span>${thb(c.baseCost)}</span></div>
-    <div class="calc-line" style="color:#00B14F">
-      <span><img src="assets/grab-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company1GP})</span>
-      <span>${thb(c.c1IncVAT)}</span>
-    </div>
-    <div class="calc-line" style="color:#333">
-      <span><img src="assets/lineman-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company2GP})</span>
-      <span>${thb(c.c2IncVAT)}</span>
-    </div>`;
+    <div class="calc-line"><span>${t('menus.raw_cost')}</span><span class="cost-val">${thb(c.rawCost)}</span></div>
+    <div class="calc-line"><span>${t('menus.hidden_total')}</span><span class="cost-val">${thb(c.hiddenTotal)}</span></div>
+    <div class="calc-line total-line"><span>${t('menus.base_cost')}</span><span class="cost-val">${thb(c.baseCost)}</span></div>
+    <div class="calc-line"><span>🏪 หน้าร้าน</span><span class="cost-val">${thb(c.instorePrice)}</span></div>
+    <div class="calc-line"><span><img src="assets/grab-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company1GP})</span><span class="cost-val">${thb(c.c1IncVAT)}</span></div>
+    <div class="calc-line"><span><img src="assets/lineman-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company2GP})</span><span class="cost-val">${thb(c.c2IncVAT)}</span></div>`;
   _renderHiddenCostTotal(c.hiddenTotal);
 }
 
@@ -143,7 +138,11 @@ export function openCostModal(menuId) {
       <div class="cost-row indent"><span>${t('menus.pkg_waste_label')} ${m.packagingWaste}%</span><span class="cost-val">${thb(c.packagingWithWaste)}</span></div>
       <div class="cost-row total"><span>${t('menus.delivery_cost')}</span><span class="cost-val">${thb(c.totalDeliveryCost)}</span></div>
       <hr class="divider">
-      <div class="cost-row delivery">
+      <div class="cost-row delivery" style="background:var(--surface-2);border-color:var(--line)">
+        <span>🏪 หน้าร้าน</span>
+        <span class="cost-val fw-bold" style="font-size:17px">${thb(c.instorePrice)}</span>
+      </div>
+      <div class="cost-row delivery" style="margin-top:6px">
         <span><img src="assets/grab-logo.svg" style="height:18px;vertical-align:middle;margin-right:6px">
         (×${m.company1GP})<br><small class="text-sm">${t('menus.pre_vat')}: ${thb(c.c1ExVAT)}</small></span>
         <span class="cost-val fw-bold" style="font-size:17px">${thb(c.c1IncVAT)}</span>
