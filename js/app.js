@@ -10,7 +10,7 @@ import { renderSales, renderPosGrid, setChannel, tapMenu, updateCartQty,
          removeFromCart, clearCart, confirmOrder, removeSaleEntry,
          onSalesDateChange } from './views/sales.js';
 import { renderReport, showReport } from './views/report.js';
-import { renderOverhead, addOverheadRow, removeOverheadRow,
+import { renderOverhead, setOverheadMonth, addOverheadRow, removeOverheadRow,
          onOverheadChange, saveAllOverhead } from './views/overhead.js';
 import { renderPurchases, openAddPurchase, closePurchaseModal, savePurchase,
          removePurchaseEntry, onPurchaseDateChange } from './views/purchases.js';
@@ -51,7 +51,7 @@ window.app = {
   addIng, removeIng, addPkg, removePkg,
   updateModalCalc, onIngChange, onPkgChange,
   addHiddenCost, removeHiddenCost, onHiddenCostChange,
-  addOverheadRow, removeOverheadRow, onOverheadChange, saveAllOverhead,
+  setOverheadMonth, addOverheadRow, removeOverheadRow, onOverheadChange, saveAllOverhead,
   setChannel, tapMenu, updateCartQty, removeFromCart,
   clearCart, confirmOrder, removeSaleEntry,
   openAddPurchase, closePurchaseModal, savePurchase, removePurchaseEntry,

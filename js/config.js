@@ -18,9 +18,10 @@ export const CHANNELS = {
 };
 
 export const STORAGE_KEYS = {
-  menus:     'coffee_menus',
-  sales:     'coffee_sales',
-  purchases: 'coffee_purchases',
+  menus:           'coffee_menus',
+  sales:           'coffee_sales',
+  purchases:       'coffee_purchases',
+  monthlyOverhead: 'coffee_monthly_overhead',
 };
 
 export const MENU_ICONS = ['☕','🧋','🍵','🥤','🍫','🍹','🧃','🌿','🫖','🍶'];

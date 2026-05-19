@@ -1,4 +1,4 @@
-import { getSalesByMonth } from '../storage.js';
+import { getSalesByMonth, getMonthlyOverhead } from '../storage.js';
 import { thb, daysInMonth } from '../utils.js';
 import { renderDailyBarChart, renderPieChart } from '../components/charts.js';
 import { t } from '../i18n.js';
@@ -15,7 +15,8 @@ export function renderReport() {
 export function showReport() {
   const year  = +document.getElementById('report-year').value;
   const month = +document.getElementById('report-month').value;
-  const sales = getSalesByMonth(year, month);
+  const sales    = getSalesByMonth(year, month);
+  const overhead = getMonthlyOverhead(year, month);
 
   if (sales.length === 0) {
     document.getElementById('report-charts').innerHTML  = `<div class="empty-state"><div class="empty-icon">📈</div><p>${t('report.no_sales')}</p></div>`;
@@ -24,34 +25,64 @@ export function showReport() {
     return;
   }
 
-  _renderSummaryCards(sales);
+  _renderSummaryCards(sales, overhead);
   _renderCharts(sales, year, month);
   _renderTable(sales);
 }
 
-function _renderSummaryCards(sales) {
-  const totalRevenue = sales.reduce((s, r) => s + r.revenue, 0);
-  const totalCups    = sales.reduce((s, r) => s + r.qty, 0);
-  const totalCost    = sales.reduce((s, r) => s + r.unitCost * r.qty, 0);
+function _renderSummaryCards(sales, overhead) {
+  const totalRevenue  = sales.reduce((s, r) => s + r.revenue, 0);
+  const totalCups     = sales.reduce((s, r) => s + r.qty, 0);
+  const totalCOGS     = sales.reduce((s, r) => s + r.unitCost * r.qty, 0);
+  const totalOverhead = overhead.reduce((s, h) => s + (Number(h.amount) || 0), 0);
+  const grossProfit   = totalRevenue - totalCOGS;
+  const netProfit     = grossProfit - totalOverhead;
+
+  const overheadRows = overhead.length > 0
+    ? overhead.map(h => `
+        <div class="oh-sum-row" style="font-size:13px">
+          <span style="color:var(--ink-soft)">${h.name}</span>
+          <span>${thb(h.amount)}</span>
+        </div>`).join('')
+    : `<div style="font-size:12px;color:var(--ink-mute);padding:4px 0">ยังไม่มีข้อมูลต้นทุนแฝงเดือนนี้ — กรอกได้ที่แท็บ "ต้นทุนแฝง"</div>`;
 
   document.getElementById('report-summary').innerHTML = `
     <div class="card">
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">💰</div>
-          <div class="stat-val">${thb(totalRevenue)}</div>
+        <div class="stat-card stat-card--feature">
           <div class="stat-label">${t('report.total_revenue')}</div>
+          <div class="stat-val">${thb(totalRevenue)}</div>
         </div>
         <div class="stat-card">
           <div class="stat-icon">☕</div>
           <div class="stat-val">${totalCups}</div>
           <div class="stat-label">${t('report.total_cups')}</div>
         </div>
-        <div class="stat-card" style="border-left-color:#2E7D32">
-          <div class="stat-icon">📊</div>
-          <div class="stat-val" style="color:#2E7D32">${thb(totalRevenue - totalCost)}</div>
-          <div class="stat-label">${t('report.est_profit')}</div>
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div class="stat-val">${thb(totalCOGS)}</div>
+          <div class="stat-label">ต้นทุนวัตถุดิบ</div>
         </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">ต้นทุนแฝงเดือนนี้</div>
+      ${overheadRows}
+      <div class="oh-sum-row oh-sum-total" style="margin-top:8px;border-radius:var(--r-sm);padding:10px 12px">
+        <span>รวมต้นทุนแฝง</span>
+        <span>${thb(totalOverhead)}</span>
+      </div>
+    </div>
+    <div class="card" style="background:${netProfit >= 0 ? 'var(--success-soft)' : 'var(--danger-soft)'}">
+      <div class="flex-between" style="margin-bottom:8px">
+        <span class="card-title" style="margin:0;color:${netProfit >= 0 ? 'var(--success)' : 'var(--danger)'}">กำไรสุทธิ</span>
+        <span style="font-size:11px;color:var(--ink-mute)">รายได้ − วัตถุดิบ − ต้นทุนแฝง</span>
+      </div>
+      <div style="font-family:var(--font-display);font-size:34px;font-weight:500;letter-spacing:-0.025em;color:${netProfit >= 0 ? 'var(--success)' : 'var(--danger)'}">
+        ${thb(netProfit)}
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:var(--ink-soft)">
+        กำไรขั้นต้น ${thb(grossProfit)} − ต้นทุนแฝง ${thb(totalOverhead)}
       </div>
     </div>`;
 }

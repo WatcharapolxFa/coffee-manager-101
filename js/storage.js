@@ -91,13 +91,31 @@ export function getPurchasesByMonth(year, month) {
   return getPurchases().filter(p => p.date.startsWith(prefix));
 }
 
+export function getMonthlyOverhead(year, month) {
+  const key = `${year}-${String(month).padStart(2, '0')}`;
+  try {
+    const all = JSON.parse(localStorage.getItem(STORAGE_KEYS.monthlyOverhead)) || {};
+    return all[key] || [];
+  } catch { return []; }
+}
+
+export function saveMonthlyOverhead(year, month, items) {
+  const key = `${year}-${String(month).padStart(2, '0')}`;
+  try {
+    const all = JSON.parse(localStorage.getItem(STORAGE_KEYS.monthlyOverhead)) || {};
+    all[key] = items;
+    localStorage.setItem(STORAGE_KEYS.monthlyOverhead, JSON.stringify(all));
+  } catch {}
+}
+
 export function exportData() {
   const data = {
     version: 1,
     exportedAt: new Date().toISOString(),
-    menus:     getMenus(),
-    sales:     getSales(),
-    purchases: getPurchases(),
+    menus:           getMenus(),
+    sales:           getSales(),
+    purchases:       getPurchases(),
+    monthlyOverhead: JSON.parse(localStorage.getItem(STORAGE_KEYS.monthlyOverhead) || '{}'),
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url  = URL.createObjectURL(blob);
@@ -120,6 +138,9 @@ export function importData(file) {
         localStorage.setItem(STORAGE_KEYS.menus,     JSON.stringify(data.menus));
         localStorage.setItem(STORAGE_KEYS.sales,     JSON.stringify(data.sales));
         localStorage.setItem(STORAGE_KEYS.purchases, JSON.stringify(data.purchases));
+        if (data.monthlyOverhead) {
+          localStorage.setItem(STORAGE_KEYS.monthlyOverhead, JSON.stringify(data.monthlyOverhead));
+        }
         resolve(data);
       } catch (err) {
         reject(err);
