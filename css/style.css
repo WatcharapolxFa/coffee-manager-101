@@ -51,9 +51,36 @@ body {
   width: auto;
   display: block;
 }
-.lang-toggle {
+.header-right {
   position: absolute;
   right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.data-actions {
+  display: flex;
+  gap: 4px;
+}
+.data-btn {
+  background: none;
+  border: 1.5px solid var(--brown-light);
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 12px;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.data-btn:hover {
+  background: var(--brown-dark);
+  border-color: var(--brown-dark);
+  color: var(--white);
+}
+.lang-toggle {
   display: flex;
   gap: 4px;
 }

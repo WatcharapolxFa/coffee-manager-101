@@ -91,6 +91,45 @@ export function getPurchasesByMonth(year, month) {
   return getPurchases().filter(p => p.date.startsWith(prefix));
 }
 
+export function exportData() {
+  const data = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    menus:     getMenus(),
+    sales:     getSales(),
+    purchases: getPurchases(),
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `coffee-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+export function importData(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (!data.menus || !data.sales || !data.purchases) {
+          throw new Error('ไฟล์ไม่ถูกต้อง');
+        }
+        localStorage.setItem(STORAGE_KEYS.menus,     JSON.stringify(data.menus));
+        localStorage.setItem(STORAGE_KEYS.sales,     JSON.stringify(data.sales));
+        localStorage.setItem(STORAGE_KEYS.purchases, JSON.stringify(data.purchases));
+        resolve(data);
+      } catch (err) {
+        reject(err);
+      }
+    };
+    reader.onerror = () => reject(new Error('อ่านไฟล์ไม่ได้'));
+    reader.readAsText(file);
+  });
+}
+
 export function seedIfEmpty() {
   if (getMenus().length > 0) return;
   addMenu({

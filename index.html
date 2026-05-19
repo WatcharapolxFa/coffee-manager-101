@@ -18,9 +18,17 @@
 <!-- HEADER -->
 <header class="app-header">
   <img src="assets/shop-logo.svg" class="shop-logo" alt="RADIANT Coffee & Bakery">
-  <div class="lang-toggle">
-    <button class="lang-btn active" data-lang="th" onclick="app.setLang('th')">TH</button>
-    <button class="lang-btn"        data-lang="en" onclick="app.setLang('en')">EN</button>
+  <div class="header-right">
+    <div class="data-actions">
+      <button class="data-btn" onclick="app.exportData()" title="Export ข้อมูล">⬇ Export</button>
+      <button class="data-btn" onclick="app.importData()" title="Import ข้อมูล">⬆ Import</button>
+      <input id="import-file-input" type="file" accept=".json" style="display:none"
+             onchange="app.handleImportFile(this)">
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="th" onclick="app.setLang('th')">TH</button>
+      <button class="lang-btn"        data-lang="en" onclick="app.setLang('en')">EN</button>
+    </div>
   </div>
 </header>
 

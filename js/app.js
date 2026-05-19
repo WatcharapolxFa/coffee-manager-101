@@ -14,6 +14,7 @@ import { renderOverhead, addOverheadRow, removeOverheadRow,
          onOverheadChange, saveAllOverhead } from './views/overhead.js';
 import { renderPurchases, openAddPurchase, closePurchaseModal, savePurchase,
          removePurchaseEntry, onPurchaseDateChange } from './views/purchases.js';
+import { exportData, importData } from './storage.js';
 
 let currentTab = 'dashboard';
 
@@ -54,6 +55,25 @@ window.app = {
   setChannel, tapMenu, updateCartQty, removeFromCart,
   clearCart, confirmOrder, removeSaleEntry,
   openAddPurchase, closePurchaseModal, savePurchase, removePurchaseEntry,
+  exportData,
+  importData: () => document.getElementById('import-file-input').click(),
+  handleImportFile: async (input) => {
+    const file = input.files[0];
+    if (!file) return;
+    if (!confirm('นำเข้าข้อมูลจะทับข้อมูลปัจจุบันทั้งหมด ยืนยันหรือไม่?')) {
+      input.value = '';
+      return;
+    }
+    try {
+      await importData(file);
+      input.value = '';
+      alert('นำเข้าข้อมูลสำเร็จ');
+      navigate(currentTab);
+    } catch (err) {
+      input.value = '';
+      alert('เกิดข้อผิดพลาด: ' + err.message);
+    }
+  },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
