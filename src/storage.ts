@@ -164,11 +164,13 @@ export function seedIfEmpty(): void {
 
 export function loadSeedMenus(): void {
   const existing = getMenus();
-  const merged: Menu[] = SEED_MENUS.map(seed => {
+  const seedNames = new Set(SEED_MENUS.map(s => s.name));
+  const nonSeedMenus = existing.filter(m => !seedNames.has(m.name));
+  const seedMenus: Menu[] = SEED_MENUS.map(seed => {
     const match = existing.find(m => m.name === seed.name);
     return match
-      ? { ...match, ...seed }
-      : { ...seed, id: genId() };
+      ? { ...match, ...seed, id: match.id }
+      : { ...seed, id: genId() } as Menu;
   });
-  saveMenus(merged);
+  saveMenus([...nonSeedMenus, ...seedMenus]);
 }
