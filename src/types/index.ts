@@ -21,6 +21,7 @@ export interface Menu {
   packagingWaste: number;
   company1GP: number;
   company2GP: number;
+  sellPrice?: Partial<Record<Channel, number>>;
 }
 
 export type MenuInput = Omit<Menu, 'id'> & { id?: string };

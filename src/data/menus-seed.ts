@@ -17,6 +17,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",                  totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 55, delivery1: 80 },
   },
   {
     name: "Iced Americano",
@@ -32,6 +33,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 50, delivery1: 70 },
   },
   {
     name: "Iced Espresso",
@@ -48,6 +50,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 50, delivery1: 75 },
   },
   {
     name: "Iced Cappuccino",
@@ -66,6 +69,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 50 },
   },
   {
     name: "Iced Mocha",
@@ -84,6 +88,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 55, delivery1: 80 },
   },
   {
     name: "Iced Matcha Latte",
@@ -100,6 +105,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 55, delivery1: 135 },
   },
   {
     name: "Thai Tea",
@@ -116,6 +122,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 50 },
   },
   {
     name: "Earl Grey Tea",
@@ -130,6 +137,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 50 },
   },
   {
     name: "Cocoa",
@@ -147,5 +155,6 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 50, delivery1: 70 },
   },
 ];

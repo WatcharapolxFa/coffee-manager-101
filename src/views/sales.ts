@@ -4,7 +4,8 @@ import { thb, todayStr, menuIcon, channelLabel, escapeHtml } from '../utils.ts';
 import { t } from '../i18n.ts';
 import type { Channel } from '../types/index.ts';
 
-let posCart: Record<string, number>  = {};
+interface CartItem { qty: number; price: number; }
+let posCart: Record<string, CartItem> = {};
 let posChannel: Channel = 'instore';
 
 export function renderSales(): void {
@@ -29,7 +30,8 @@ export function renderPosGrid(): void {
 
   grid.innerHTML = menus.map((m, i) => {
     const price = getUnitPrice(m, posChannel);
-    const qty   = posCart[m.id] || 0;
+    const item  = posCart[m.id];
+    const qty   = item?.qty || 0;
     return `<button class="pos-menu-btn ${qty > 0 ? 'in-cart' : ''}" onclick="app.tapMenu('${m.id}')">
       ${qty > 0 ? `<span class="pmb-badge">${qty}</span>` : ''}
       <span class="pmb-icon">${menuIcon(m.name, i)}</span>
@@ -51,11 +53,11 @@ export function renderCart(): void {
 
   let total = 0;
   if (itemsEl) {
-    itemsEl.innerHTML = entries.map(([menuId, qty]) => {
+    itemsEl.innerHTML = entries.map(([menuId, item]) => {
+      const { qty, price } = item as CartItem;
       const m = getMenuById(menuId);
       if (!m) return '';
-      const unitPrice = getUnitPrice(m, posChannel);
-      const subtotal  = unitPrice * qty;
+      const subtotal = price * qty;
       total += subtotal;
       return `<div class="pos-cart-item">
         <div class="pos-cart-item-name">${escapeHtml(m.name)}</div>
@@ -64,7 +66,12 @@ export function renderCart(): void {
           <span class="pos-qty-num">${qty}</span>
           <button class="pos-qty-btn" onclick="app.updateCartQty('${menuId}',1)">+</button>
         </div>
-        <div class="pos-cart-item-price">${thb(subtotal)}</div>
+        <div class="pos-cart-item-price">
+          <input type="number" class="pos-price-input" min="0" step="1" value="${price}"
+            onchange="app.updateCartPrice('${menuId}',this.value)"
+            onclick="event.stopPropagation()" />
+          <span class="pos-price-sub">${thb(subtotal)}</span>
+        </div>
         <button class="pos-del-btn" onclick="app.removeFromCart('${menuId}')">✕</button>
       </div>`;
     }).join('');
@@ -111,15 +118,32 @@ export function setChannel(ch: Channel): void {
 }
 
 export function tapMenu(menuId: string): void {
-  posCart[menuId] = (posCart[menuId] || 0) + 1;
+  const m = getMenuById(menuId);
+  if (!m) return;
+  const existing = posCart[menuId];
+  posCart[menuId] = {
+    qty:   (existing?.qty || 0) + 1,
+    price: existing?.price ?? Math.ceil(getUnitPrice(m, posChannel)),
+  };
   renderPosGrid();
   renderCart();
 }
 
 export function updateCartQty(menuId: string, delta: number): void {
-  posCart[menuId] = (posCart[menuId] || 0) + delta;
-  if (posCart[menuId] <= 0) delete posCart[menuId];
+  const item = posCart[menuId];
+  if (!item) return;
+  const newQty = item.qty + delta;
+  if (newQty <= 0) { delete posCart[menuId]; }
+  else { posCart[menuId] = { ...item, qty: newQty }; }
   renderPosGrid();
+  renderCart();
+}
+
+export function updateCartPrice(menuId: string, rawValue: string): void {
+  const item = posCart[menuId];
+  if (!item) return;
+  const price = Math.max(0, Math.ceil(parseFloat(rawValue) || 0));
+  posCart[menuId] = { ...item, price };
   renderCart();
 }
 
@@ -140,16 +164,16 @@ export function confirmOrder(): void {
   const entries = Object.entries(posCart);
   if (!entries.length) return;
 
-  entries.forEach(([menuId, qty]) => {
+  entries.forEach(([menuId, item]) => {
+    const { qty, price } = item as CartItem;
     const m = getMenuById(menuId);
     if (!m || qty <= 0) return;
-    const unitPrice = getUnitPrice(m, posChannel);
-    const unitCost  = getUnitCost(m);
+    const unitCost = getUnitCost(m);
     addSale({
       date, menuId, menuName: m.name, qty, channel: posChannel,
-      unitPrice: +unitPrice.toFixed(2),
+      unitPrice: price,
       unitCost:  +unitCost.toFixed(2),
-      revenue:   +(unitPrice * qty).toFixed(2),
+      revenue:   price * qty,
     });
   });
 

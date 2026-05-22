@@ -6,7 +6,7 @@ import { renderMenus, openAddMenu, openEditMenu, closeMenuModal, saveMenu,
          addIng, removeIng, addPkg, removePkg, updateModalCalc,
          onIngChange, onPkgChange,
          addHiddenCost, removeHiddenCost, onHiddenCostChange } from './views/menus.ts';
-import { renderSales, renderPosGrid, setChannel, tapMenu, updateCartQty,
+import { renderSales, renderPosGrid, setChannel, tapMenu, updateCartQty, updateCartPrice,
          removeFromCart, clearCart, confirmOrder, removeSaleEntry,
          onSalesDateChange } from './views/sales.ts';
 import { renderOverhead, setOverheadMonth, addOverheadRow, removeOverheadRow,
@@ -58,7 +58,7 @@ const appExports = {
   updateModalCalc, onIngChange, onPkgChange,
   addHiddenCost, removeHiddenCost, onHiddenCostChange,
   setOverheadMonth, addOverheadRow, removeOverheadRow, onOverheadChange, saveAllOverhead,
-  setChannel, tapMenu, updateCartQty, removeFromCart,
+  setChannel, tapMenu, updateCartQty, updateCartPrice, removeFromCart,
   clearCart, confirmOrder, removeSaleEntry,
   openAddPurchase, closePurchaseModal, savePurchase, removePurchaseEntry,
   exportData,

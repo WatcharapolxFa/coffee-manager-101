@@ -50,6 +50,8 @@ export function calcMenu(menu: Partial<Menu>): CalcResult {
 }
 
 export function getUnitPrice(menu: Partial<Menu>, channel: Channel): number {
+  const override = menu.sellPrice?.[channel];
+  if (override !== undefined && override > 0) return override;
   const c = calcMenu(menu);
   if (channel === 'delivery2') return c.c2IncVAT;
   if (channel === 'instore')   return c.instorePrice;

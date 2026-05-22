@@ -657,7 +657,22 @@ html, body {
 }
 .pos-qty-btn:hover { background: rgba(255,255,255,0.15); }
 .pos-qty-num { width: 28px; text-align: center; font-family: var(--font-display); font-size: 16px; color: #fff; }
-.pos-cart-item-price { font-family: var(--font-display); font-size: 14px; min-width: 56px; text-align: right; color: rgba(244,235,219,0.85); }
+.pos-cart-item-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-width: 72px; }
+.pos-price-input {
+  width: 68px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  padding: 3px 6px;
+  outline: none;
+}
+.pos-price-input:focus { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.18); }
+.pos-price-sub { font-size: 11px; color: rgba(244,235,219,0.55); font-family: var(--font-display); }
 .pos-del-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.3); font-size: 18px; padding: 0 2px; }
 .pos-del-btn:hover { color: #ff8080; }
 .pos-cart-footer { padding: 14px 18px 18px; }
