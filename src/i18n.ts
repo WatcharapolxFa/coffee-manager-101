@@ -17,6 +17,21 @@ const DICT: Record<Lang, Record<string, string>> = {
     'dash.no_sales':        'ยังไม่มีข้อมูลยอดขาย',
     'dash.cups_unit':       'แก้ว',
 
+    'dash.today_vs_yday':   'วันนี้ vs เมื่อวาน',
+    'dash.today_rev':       'รายได้วันนี้',
+    'dash.today_cups':      'แก้ววันนี้',
+    'dash.vs_yday':         'เทียบเมื่อวาน',
+    'dash.no_yday':         'ไม่มีข้อมูลเมื่อวาน',
+
+    'dash.channel_breakdown': 'ยอดขายแยกช่องทาง (เดือนนี้)',
+    'dash.ch_instore':      '🏪 หน้าร้าน',
+    'dash.ch_grab':         'Grab',
+    'dash.ch_lineman':      'LINE MAN',
+    'dash.no_channel_data': 'ยังไม่มีข้อมูลเดือนนี้',
+
+    'dash.margin_label':    'Margin',
+    'dash.cups_short':      'แก้ว',
+
     'sales.order':         '🛒 ออเดอร์',
     'sales.clear':         'ล้าง',
     'sales.total':         'รวม',
@@ -131,6 +146,21 @@ const DICT: Record<Lang, Record<string, string>> = {
     'dash.top_menus':       'Top Selling 🏆',
     'dash.no_sales':        'No sales data yet',
     'dash.cups_unit':       'cups',
+
+    'dash.today_vs_yday':   'Today vs Yesterday',
+    'dash.today_rev':       "Today's Revenue",
+    'dash.today_cups':      "Today's Cups",
+    'dash.vs_yday':         'vs yesterday',
+    'dash.no_yday':         'No data yesterday',
+
+    'dash.channel_breakdown': 'Sales by Channel (This Month)',
+    'dash.ch_instore':      '🏪 In-store',
+    'dash.ch_grab':         'Grab',
+    'dash.ch_lineman':      'LINE MAN',
+    'dash.no_channel_data': 'No data this month',
+
+    'dash.margin_label':    'Margin',
+    'dash.cups_short':      'cups',
 
     'sales.order':         '🛒 Order',
     'sales.clear':         'Clear',

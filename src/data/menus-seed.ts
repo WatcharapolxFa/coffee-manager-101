@@ -155,6 +155,25 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
-    sellPrice: { instore: 50, delivery1: 70 },
+    sellPrice: { instore: 40, delivery1: 70 },
+  },
+  {
+    name: "Fruit Punch",
+    ingredients: [
+      // หัวเชื้อ 1372ml (น้ำส้ม 500ml + น้ำตาล+น้ำหวาน+มะนาว + โซดา 162ml) → ใช้ 45ml/แก้ว
+      { name: "น้ำส้ม",   totalQty: 700,  totalPrice: 202, usedQty: 16 }, // 500/1372×45≈16ml จากขวด 700ml
+      { name: "น้ำตาล",  totalQty: 1372, totalPrice: 30,  usedQty: 45 }, // 30฿/batch → ต่อแก้ว 0.98฿
+      { name: "น้ำหวาน", totalQty: 1372, totalPrice: 67,  usedQty: 45 }, // 67฿/batch → ต่อแก้ว 2.20฿
+      { name: "มะนาว",   totalQty: 1372, totalPrice: 150, usedQty: 45 }, // 150฿/batch → ต่อแก้ว 4.92฿
+      { name: "โซดา",    totalQty: 7800, totalPrice: 178, usedQty: 95 }, // 162ml(หัวเชื้อ)÷1372×45+90ml ≈95ml
+    ],
+    packaging: [
+      { name: "หลอด",             totalQty: 200, totalPrice: 50, usedQty: 1 },
+      { name: "กระดาษปิดปากแก้ว", totalQty: 200, totalPrice: 20, usedQty: 1 },
+      { name: "ฝาเรียบ",          totalQty: 50,  totalPrice: 50, usedQty: 1 },
+      { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
+    ],
+    hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 30 },
   },
 ];

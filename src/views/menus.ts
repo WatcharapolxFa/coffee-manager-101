@@ -1,9 +1,9 @@
 import { getMenus, getMenuById, addMenu, updateMenu, deleteMenu } from '../storage.ts';
-import { calcMenu } from '../calculator.ts';
+import { calcMenu, getUnitPrice } from '../calculator.ts';
 import { thb, menuIcon, escapeHtml } from '../utils.ts';
 import { DEFAULTS, ASSET_BASE } from '../config.ts';
 import { t } from '../i18n.ts';
-import type { Ingredient, HiddenCost } from '../types/index.ts';
+import type { Ingredient, HiddenCost, Channel } from '../types/index.ts';
 
 let editingMenuId    = '';
 let modalIngredients: Ingredient[] = [];
@@ -113,13 +113,20 @@ export function updateModalCalc(): void {
   const base = ASSET_BASE;
   const el = document.getElementById('modal-calc');
   if (!el) return;
+  const pInstore   = getUnitPrice(m, 'instore');
+  const pDelivery1 = getUnitPrice(m, 'delivery1');
+  const pDelivery2 = getUnitPrice(m, 'delivery2');
+  const overTag = (ch: Channel, calc: number) =>
+    m.sellPrice?.[ch]
+      ? ` <span style="opacity:.5;font-size:11px">(คำนวณ: ${thb(calc)})</span>`
+      : '';
   el.innerHTML = `
     <div class="calc-line"><span>${t('menus.raw_cost')}</span><span class="cost-val">${thb(c.rawCost)}</span></div>
     <div class="calc-line"><span>${t('menus.hidden_total')}</span><span class="cost-val">${thb(c.hiddenTotal)}</span></div>
     <div class="calc-line total-line"><span>${t('menus.base_cost')}</span><span class="cost-val">${thb(c.baseCost)}</span></div>
-    <div class="calc-line"><span>🏪 หน้าร้าน</span><span class="cost-val">${thb(c.instorePrice)}</span></div>
-    <div class="calc-line"><span><img src="${base}assets/grab-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company1GP})</span><span class="cost-val">${thb(c.c1IncVAT)}</span></div>
-    <div class="calc-line"><span><img src="${base}assets/lineman-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company2GP})</span><span class="cost-val">${thb(c.c2IncVAT)}</span></div>`;
+    <div class="calc-line"><span>🏪 หน้าร้าน${overTag('instore', c.instorePrice)}</span><span class="cost-val">${thb(pInstore)}</span></div>
+    <div class="calc-line"><span><img src="${base}assets/grab-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company1GP})${overTag('delivery1', c.c1IncVAT)}</span><span class="cost-val">${thb(pDelivery1)}</span></div>
+    <div class="calc-line"><span><img src="${base}assets/lineman-logo.svg" style="height:12px;vertical-align:middle"> (×${m.company2GP})${overTag('delivery2', c.c2IncVAT)}</span><span class="cost-val">${thb(pDelivery2)}</span></div>`;
   _renderHiddenCostTotal(c.hiddenTotal);
 }
 
@@ -149,20 +156,30 @@ export function openCostModal(menuId: string): void {
       <div class="cost-row indent"><span>${t('menus.pkg_waste_label')} ${m.packagingWaste}%</span><span class="cost-val">${thb(c.packagingWithWaste)}</span></div>
       <div class="cost-row total"><span>${t('menus.delivery_cost')}</span><span class="cost-val">${thb(c.totalDeliveryCost)}</span></div>
       <hr class="divider">
+      ${((): string => {
+        const pInstore   = getUnitPrice(m, 'instore');
+        const pDelivery1 = getUnitPrice(m, 'delivery1');
+        const pDelivery2 = getUnitPrice(m, 'delivery2');
+        const overNote = (actual: number, calc: number) =>
+          Math.abs(actual - calc) > 0.01
+            ? `<small class="text-sm" style="opacity:.6">คำนวณ: ${thb(calc)}</small>`
+            : '';
+        return `
       <div class="cost-row delivery" style="background:var(--surface-2);border-color:var(--line)">
-        <span>🏪 หน้าร้าน</span>
-        <span class="cost-val fw-bold" style="font-size:17px">${thb(c.instorePrice)}</span>
+        <span>🏪 หน้าร้าน<br>${overNote(pInstore, c.instorePrice)}</span>
+        <span class="cost-val fw-bold" style="font-size:17px">${thb(pInstore)}</span>
       </div>
       <div class="cost-row delivery" style="margin-top:6px">
         <span><img src="${base}assets/grab-logo.svg" style="height:18px;vertical-align:middle;margin-right:6px">
-        (×${m.company1GP})<br><small class="text-sm">${t('menus.pre_vat')}: ${thb(c.c1ExVAT)}</small></span>
-        <span class="cost-val fw-bold" style="font-size:17px">${thb(c.c1IncVAT)}</span>
+        (×${m.company1GP})<br><small class="text-sm">${t('menus.pre_vat')}: ${thb(c.c1ExVAT)}</small>${overNote(pDelivery1, c.c1IncVAT)}</span>
+        <span class="cost-val fw-bold" style="font-size:17px">${thb(pDelivery1)}</span>
       </div>
       <div class="cost-row delivery" style="margin-top:6px;background:#FFFDE7;border-color:#FFF176">
         <span><img src="${base}assets/lineman-logo.svg" style="height:18px;vertical-align:middle;margin-right:6px">
-        (×${m.company2GP})<br><small class="text-sm">${t('menus.pre_vat')}: ${thb(c.c2ExVAT)}</small></span>
-        <span class="cost-val fw-bold" style="font-size:17px">${thb(c.c2IncVAT)}</span>
-      </div>
+        (×${m.company2GP})<br><small class="text-sm">${t('menus.pre_vat')}: ${thb(c.c2ExVAT)}</small>${overNote(pDelivery2, c.c2IncVAT)}</span>
+        <span class="cost-val fw-bold" style="font-size:17px">${thb(pDelivery2)}</span>
+      </div>`;
+      })()}
     </div>
     <hr class="divider" style="margin:14px 0">
     <div class="card-title" style="margin-bottom:8px">${t('menus.ing_detail')}</div>
@@ -214,10 +231,20 @@ function _fillModalFields(m: ReturnType<typeof getMenuById>): void {
   (document.getElementById('pkg-waste')    as HTMLInputElement).value = String(m?.packagingWaste ?? DEFAULTS.packagingWaste);
   (document.getElementById('company1-gp') as HTMLInputElement).value = String(m?.company1GP     ?? DEFAULTS.company1GP);
   (document.getElementById('company2-gp') as HTMLInputElement).value = String(m?.company2GP     ?? DEFAULTS.company2GP);
+  (document.getElementById('sell-instore')   as HTMLInputElement).value = m?.sellPrice?.instore   ? String(m.sellPrice.instore)   : '';
+  (document.getElementById('sell-delivery1') as HTMLInputElement).value = m?.sellPrice?.delivery1 ? String(m.sellPrice.delivery1) : '';
+  (document.getElementById('sell-delivery2') as HTMLInputElement).value = m?.sellPrice?.delivery2 ? String(m.sellPrice.delivery2) : '';
   _renderHiddenCostTable();
 }
 
 function _collectModalData() {
+  const spInstore   = +(document.getElementById('sell-instore')   as HTMLInputElement).value || 0;
+  const spDelivery1 = +(document.getElementById('sell-delivery1') as HTMLInputElement).value || 0;
+  const spDelivery2 = +(document.getElementById('sell-delivery2') as HTMLInputElement).value || 0;
+  const sellPrice: Partial<Record<Channel, number>> = {};
+  if (spInstore   > 0) sellPrice.instore   = spInstore;
+  if (spDelivery1 > 0) sellPrice.delivery1 = spDelivery1;
+  if (spDelivery2 > 0) sellPrice.delivery2 = spDelivery2;
   return {
     name:           (document.getElementById('menu-name')    as HTMLInputElement).value.trim(),
     ingredients:    modalIngredients.filter(r => r.name || r.totalQty),
@@ -227,6 +254,7 @@ function _collectModalData() {
     packagingWaste: +(document.getElementById('pkg-waste')    as HTMLInputElement).value    || DEFAULTS.packagingWaste,
     company1GP:     +(document.getElementById('company1-gp') as HTMLInputElement).value    || DEFAULTS.company1GP,
     company2GP:     +(document.getElementById('company2-gp') as HTMLInputElement).value    || DEFAULTS.company2GP,
+    sellPrice:      Object.keys(sellPrice).length ? sellPrice : undefined,
   };
 }
 
