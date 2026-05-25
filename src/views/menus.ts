@@ -196,7 +196,7 @@ export function closeCostModal(): void {
 }
 
 function _emptyRow(): Ingredient {
-  return { name: '', totalQty: '', totalPrice: '', usedQty: '' };
+  return { name: '', totalQty: 0, totalPrice: 0, usedQty: 0 };
 }
 
 function _openModal(): void {
@@ -219,7 +219,7 @@ function _fillModalFields(m: ReturnType<typeof getMenuById>): void {
 
 function _collectModalData() {
   return {
-    name:           (document.getElementById('menu-name')    as HTMLInputElement).value.trim() || 'เมนูใหม่',
+    name:           (document.getElementById('menu-name')    as HTMLInputElement).value.trim(),
     ingredients:    modalIngredients.filter(r => r.name || r.totalQty),
     hiddenCosts:    modalHiddenCosts.map(c => ({ ...c })),
     vat:            +(document.getElementById('menu-vat')     as HTMLInputElement).value    || DEFAULTS.vat,
@@ -284,12 +284,12 @@ export function removeHiddenCost(i: number): void {
 }
 
 export function onIngChange(i: number, field: keyof Ingredient, val: string | number): void {
-  modalIngredients[i] = { ...modalIngredients[i], [field]: val };
+  modalIngredients[i] = { ...modalIngredients[i], [field]: field === 'name' ? val : Number(val) };
   updateModalCalc();
 }
 
 export function onPkgChange(i: number, field: keyof Ingredient, val: string | number): void {
-  modalPackaging[i] = { ...modalPackaging[i], [field]: val };
+  modalPackaging[i] = { ...modalPackaging[i], [field]: field === 'name' ? val : Number(val) };
   updateModalCalc();
 }
 

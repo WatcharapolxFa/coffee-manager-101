@@ -1,5 +1,5 @@
 import { getLang, setLang as i18nSetLang, applyStatic } from './i18n.ts';
-import { seedIfEmpty, exportData, importData, loadSeedMenus } from './storage.ts';
+import { seedIfEmpty, buildExportBlob, importData, loadSeedMenus } from './storage.ts';
 import { renderDashboard } from './views/dashboard.ts';
 import { renderMenus, openAddMenu, openEditMenu, closeMenuModal, saveMenu,
          confirmDeleteMenu, openCostModal, closeCostModal,
@@ -61,7 +61,15 @@ const appExports = {
   setChannel, tapMenu, updateCartQty, updateCartPrice, removeFromCart,
   clearCart, confirmOrder, removeSaleEntry,
   openAddPurchase, closePurchaseModal, savePurchase, removePurchaseEntry,
-  exportData,
+  exportData: () => {
+    const blob = buildExportBlob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `coffee-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  },
   importData: () => (document.getElementById('import-file-input') as HTMLInputElement)?.click(),
   handleImportFile: async (input: HTMLInputElement) => {
     const file = input.files?.[0];

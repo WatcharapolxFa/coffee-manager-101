@@ -1,8 +1,8 @@
 export interface Ingredient {
   name: string;
-  totalQty: number | string;
-  totalPrice: number | string;
-  usedQty: number | string;
+  totalQty: number;
+  totalPrice: number;
+  usedQty: number;
 }
 
 export interface HiddenCost {

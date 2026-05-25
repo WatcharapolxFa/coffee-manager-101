@@ -110,7 +110,7 @@ export function saveMonthlyOverhead(year: number, month: number, items: Overhead
   } catch { /* storage full — silent */ }
 }
 
-export function exportData(): void {
+export function buildExportBlob(): Blob {
   const data: StorageExport = {
     version: 1,
     exportedAt: new Date().toISOString(),
@@ -119,13 +119,7 @@ export function exportData(): void {
     purchases:       getPurchases(),
     monthlyOverhead: JSON.parse(localStorage.getItem(STORAGE_KEYS.monthlyOverhead) ?? '{}'),
   };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = `coffee-backup-${new Date().toISOString().slice(0, 10)}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
+  return new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
 }
 
 export function importData(file: File): Promise<StorageExport> {

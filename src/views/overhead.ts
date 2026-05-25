@@ -1,11 +1,7 @@
 import { getMonthlyOverhead, saveMonthlyOverhead } from '../storage.ts';
 import { thb, escapeHtml } from '../utils.ts';
+import { t } from '../i18n.ts';
 import type { OverheadItem } from '../types/index.ts';
-
-const MONTH_NAMES = [
-  'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
-  'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
-];
 
 let ohYear  = new Date().getFullYear();
 let ohMonth = new Date().getMonth() + 1;
@@ -64,7 +60,7 @@ function _render(): void {
         <div class="form-group" style="margin-bottom:0">
           <label class="form-label">เดือน</label>
           <select class="form-control" onchange="app.setOverheadMonth(null, +this.value)">
-            ${MONTH_NAMES.map((n, i) => `<option value="${i + 1}" ${i + 1 === ohMonth ? 'selected' : ''}>${n}</option>`).join('')}
+            ${Array.from({ length: 12 }, (_, i) => `<option value="${i + 1}" ${i + 1 === ohMonth ? 'selected' : ''}>${t('month.' + (i + 1))}</option>`).join('')}
           </select>
         </div>
         <div class="form-group" style="margin-bottom:0">
@@ -76,7 +72,7 @@ function _render(): void {
       </div>
     </div>
     <div class="card">
-      <div class="card-title">ค่าใช้จ่ายรายเดือน — ${MONTH_NAMES[ohMonth - 1]} ${ohYear}</div>
+      <div class="card-title">ค่าใช้จ่ายรายเดือน — ${t('month.' + ohMonth)} ${ohYear}</div>
       <table class="hc-table">
         <thead><tr>
           <th>รายการ</th>
