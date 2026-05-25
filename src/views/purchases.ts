@@ -32,7 +32,7 @@ export function renderPurchaseHistory(): void {
       </div>
       <div class="history-item-right">
         <div class="history-item-rev" style="color:var(--danger)">${thb(p.totalPrice)}</div>
-        <button class="btn btn-danger btn-sm" style="margin-top:4px" onclick="app.removePurchaseEntry('${p.id}')">${t('purchase.delete')}</button>
+        <button class="btn btn-danger btn-sm" style="margin-top:6px" onclick="app.removePurchaseEntry('${p.id}')">${t('purchase.delete')}</button>
       </div>
     </div>`).join('');
   if (totalEl) totalEl.textContent = thb(totalSpend);

@@ -72,7 +72,7 @@ export const SEED_MENUS: MenuInput[] = [
     sellPrice: { instore: 50 },
   },
   {
-    name: "Iced Mocha",
+    name: "Iced Mocca",
     ingredients: [
       { name: "เมล็ดกาแฟคั่วเข้ม (Medium Roasted)", totalQty: 1000, totalPrice: 550, usedQty: 17 },
       { name: "ช็อกโกแลต",  totalQty: 500,  totalPrice: 560, usedQty: 1  },
@@ -137,7 +137,7 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
     ],
     hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
-    sellPrice: { instore: 50 },
+    sellPrice: { instore: 35 },
   },
   {
     name: "Cocoa",
@@ -166,6 +166,26 @@ export const SEED_MENUS: MenuInput[] = [
       { name: "น้ำหวาน", totalQty: 1372, totalPrice: 67,  usedQty: 45 }, // 67฿/batch → ต่อแก้ว 2.20฿
       { name: "มะนาว",   totalQty: 1372, totalPrice: 150, usedQty: 45 }, // 150฿/batch → ต่อแก้ว 4.92฿
       { name: "โซดา",    totalQty: 7800, totalPrice: 178, usedQty: 95 }, // 162ml(หัวเชื้อ)÷1372×45+90ml ≈95ml
+    ],
+    packaging: [
+      { name: "หลอด",             totalQty: 200, totalPrice: 50, usedQty: 1 },
+      { name: "กระดาษปิดปากแก้ว", totalQty: 200, totalPrice: 20, usedQty: 1 },
+      { name: "ฝาเรียบ",          totalQty: 50,  totalPrice: 50, usedQty: 1 },
+      { name: "แก้ว",             totalQty: 50,  totalPrice: 50, usedQty: 1 },
+    ],
+    hiddenCosts: [], vat: 30, packagingWaste: 5, company1GP: 1.7, company2GP: 1.5,
+    sellPrice: { instore: 30 },
+  },
+  {
+    name: "Fruit Punch",
+    // สูตรหัวเชื้อ: น้ำส้ม 500ml + น้ำตาล + น้ำหวาน + มะนาว → รวม ~1,372ml / ใช้ 45ml/cup (~30 cups)
+    // โซดา: 7,800ml (24 ขวด) ราคา 178 บาท / ใช้ 90ml/cup
+    ingredients: [
+      { name: "น้ำส้ม",   totalQty: 700,  totalPrice: 202, usedQty: 16  }, // 202฿/700ml, ใช้ 16ml/cup
+      { name: "น้ำตาล",   totalQty: 1000, totalPrice: 30,  usedQty: 33  }, // 30฿/kg, ใช้ 33g/cup
+      { name: "น้ำหวาน",  totalQty: 450,  totalPrice: 67,  usedQty: 15  }, // 67฿/450ml, ใช้ 15ml/cup
+      { name: "มะนาว",    totalQty: 1000, totalPrice: 150, usedQty: 33  }, // 150฿/kg, ใช้ 33g/cup
+      { name: "โซดา",     totalQty: 7800, totalPrice: 178, usedQty: 90  }, // 24 ขวด/7,800ml, ใช้ 90ml/cup
     ],
     packaging: [
       { name: "หลอด",             totalQty: 200, totalPrice: 50, usedQty: 1 },

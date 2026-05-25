@@ -102,7 +102,7 @@ export function renderSalesHistory(): void {
       </div>
       <div class="history-item-right">
         <div class="history-item-rev">${thb(s.revenue)}</div>
-        <button class="btn btn-danger btn-sm" style="margin-top:4px" onclick="app.removeSaleEntry('${s.id}')">${t('sales.delete')}</button>
+        <button class="btn btn-danger btn-sm" style="margin-top:6px" onclick="app.removeSaleEntry('${s.id}')">${t('sales.delete')}</button>
       </div>
     </div>`).join('');
   if (totalEl) totalEl.textContent = thb(totalRev);

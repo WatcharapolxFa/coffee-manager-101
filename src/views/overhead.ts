@@ -82,7 +82,7 @@ function _render(): void {
         <tbody id="oh-items-tbody"></tbody>
       </table>
       <button class="btn btn-secondary btn-sm mt-8" onclick="app.addOverheadRow()">+ เพิ่มรายการ</button>
-      <div class="oh-sum-row oh-sum-total" style="margin-top:14px;border-radius:var(--r-sm);padding:12px 14px">
+      <div class="oh-sum-row oh-sum-total" style="margin-top:16px;border-radius:var(--r-sm);padding:13px 16px">
         <span>รวมต้นทุนแฝงเดือนนี้</span>
         <span id="oh-total"></span>
       </div>
