@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'none';">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Coffee Manager">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <title>RADIANT Coffee &amp; Bakery</title>
+  <link rel="icon" type="image/svg+xml" href="assets/shop-logo.svg">
+  <style>
+    /* inline overrides for components rendered by JS views */
+    #pos-cart-total-val { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 28px; letter-spacing: -0.025em; color: #fff; }
+    #sales-day-total, #purchase-day-total { font-family: 'Fraunces', Georgia, serif; }
+    #stat-revenue, #stat-cups, #stat-profit { font-family: 'Fraunces', Georgia, serif; }
+  </style>
+  <script type="module" crossorigin src="/coffee-manager-101/assets/index-C3KaOB2i.js"></script>
+  <link rel="modulepreload" crossorigin href="/coffee-manager-101/assets/chartjs-BR_H7_9u.js">
+  <link rel="stylesheet" crossorigin href="/coffee-manager-101/assets/index-jIYegEsO.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="app-header__logo">
+    <div class="logo-mark">R</div>
+    <div class="logo-text">
+      <div class="logo-text__name">RADIANT</div>
+      <div class="logo-text__sub">Coffee · Bakery</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="app.exportData()" title="Export ข้อมูล">⬇</button>
+    <button class="icon-btn" onclick="app.importData()" title="Import ข้อมูล">⬆</button>
+    <input id="import-file-input" type="file" accept=".json" style="display:none"
+           onchange="app.handleImportFile(this)">
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="th" onclick="app.setLang('th')">TH</button>
+      <button class="lang-btn"        data-lang="en" onclick="app.setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- BOTTOM TAB BAR -->
+<nav class="tabbar">
+  <button class="nav-tab" data-tab="dashboard">
+    <div class="tab-icon">📊</div>
+    <span data-i18n="nav.dashboard">ภาพรวม</span>
+  </button>
+  <button class="nav-tab" data-tab="sales">
+    <div class="tab-icon">📝</div>
+    <span data-i18n="nav.sales">บันทึกขาย</span>
+  </button>
+  <button class="nav-tab" data-tab="menus">
+    <div class="tab-icon">☕</div>
+    <span data-i18n="nav.menus">เมนู</span>
+  </button>
+  <button class="nav-tab" data-tab="overhead">
+    <div class="tab-icon">💰</div>
+    <span data-i18n="nav.overhead">ต้นทุนแฝง</span>
+  </button>
+  <button class="nav-tab" data-tab="purchases">
+    <div class="tab-icon">🛒</div>
+    <span data-i18n="nav.purchases">ซื้อวัตถุดิบ</span>
+  </button>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <!-- TAB 1: DASHBOARD -->
+  <div id="tab-dashboard" class="tab-panel">
+
+    <!-- Feature A: Today vs Yesterday -->
+    <div class="card card--today">
+      <div class="card-title" data-i18n="dash.today_vs_yday">วันนี้ vs เมื่อวาน</div>
+      <div id="today-vs-yday"></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card stat-card--feature">
+        <div class="stat-label" data-i18n="dash.monthly_revenue">ยอดขายเดือนนี้</div>
+        <div class="stat-val" id="stat-revenue">฿0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">☕</div>
+        <div class="stat-val" id="stat-cups">0</div>
+        <div class="stat-label" data-i18n="dash.cups_sold">แก้วที่ขาย</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-val" id="stat-profit">฿0</div>
+        <div class="stat-label" data-i18n="dash.est_profit">กำไรโดยประมาณ</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" data-i18n="dash.daily_sales">ยอดขายรายวัน (เดือนนี้)</div>
+      <div class="chart-box"><canvas id="dash-chart"></canvas></div>
+    </div>
+
+    <!-- Feature B: Channel Breakdown -->
+    <div class="card">
+      <div class="card-title" data-i18n="dash.channel_breakdown">ยอดขายแยกช่องทาง (เดือนนี้)</div>
+      <div id="channel-breakdown"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" data-i18n="dash.top_menus">เมนูขายดี 🏆</div>
+      <div id="top-menus"></div>
+    </div>
+  </div>
+
+  <!-- TAB 2: SALES (POS style) -->
+  <div id="tab-sales" class="tab-panel">
+    <div class="pos-topbar">
+      <input type="date" id="sales-date" class="form-control pos-date">
+      <div class="channel-toggle">
+        <button class="ch-btn ch-btn--instore active" data-ch="instore" onclick="app.setChannel('instore')">
+          🏪 หน้าร้าน
+        </button>
+        <button class="ch-btn" data-ch="delivery1" onclick="app.setChannel('delivery1')">
+          <img src="assets/grab-logo.svg" class="ch-logo" alt="Grab">
+        </button>
+        <button class="ch-btn" data-ch="delivery2" onclick="app.setChannel('delivery2')">
+          <img src="assets/lineman-logo.svg" class="ch-logo" alt="LINE MAN">
+        </button>
+      </div>
+    </div>
+    <div id="pos-menu-grid" class="pos-menu-grid"></div>
+    <div id="pos-cart" class="pos-cart" style="display:none">
+      <div class="pos-cart-header">
+        <span data-i18n="sales.order">🛒 ออเดอร์</span>
+        <button class="btn btn-danger btn-sm" onclick="app.clearCart()" data-i18n="sales.clear">ล้าง</button>
+      </div>
+      <div id="pos-cart-items"></div>
+      <div class="pos-cart-footer">
+        <div class="pos-cart-total">
+          <span data-i18n="sales.total">รวม</span>
+          <span id="pos-cart-total-val" class="fw-bold" style="font-size:20px;color:var(--brown-dark)">฿0.00</span>
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:10px;font-size:16px;padding:14px"
+                onclick="app.confirmOrder()" data-i18n="sales.confirm_order">✅ บันทึกออเดอร์</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="flex-between" style="margin-bottom:12px">
+        <span class="section-title" data-i18n="sales.today_records">บันทึกวันนี้</span>
+        <span class="fw-bold color-brown" id="sales-day-total">฿0.00</span>
+      </div>
+      <div id="sales-history-list"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: MENUS -->
+  <div id="tab-menus" class="tab-panel">
+    <div class="section-header">
+      <span class="section-title" data-i18n="menus.all_menus">เมนูทั้งหมด</span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary btn-sm" onclick="app.loadSeedMenus()" title="โหลดเมนูจาก template ใน code">🔄 template</button>
+        <button class="btn btn-primary btn-sm" onclick="app.openAddMenu()" data-i18n="menus.add">+ เพิ่มเมนู</button>
+      </div>
+    </div>
+    <div id="menu-grid" class="menu-grid"></div>
+  </div>
+
+  <!-- TAB 4: OVERHEAD COSTS (monthly) -->
+  <div id="tab-overhead" class="tab-panel">
+    <div id="overhead-container"></div>
+    <button id="overhead-save-all-btn" class="btn btn-primary btn-full"
+            style="font-size:15px;padding:14px;margin-top:8px"
+            onclick="app.saveAllOverhead()">
+      💾 บันทึก
+    </button>
+  </div>
+
+  <!-- TAB 5: PURCHASES -->
+  <div id="tab-purchases" class="tab-panel">
+    <div class="pos-topbar">
+      <input type="date" id="purchase-date" class="form-control pos-date">
+      <button class="btn btn-primary" onclick="app.openAddPurchase()" data-i18n="purchase.add_btn">+ เพิ่มรายการ</button>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="flex-between" style="margin-bottom:12px">
+        <span class="section-title" data-i18n="purchase.today_records">รายการวันนี้</span>
+        <span class="fw-bold" style="color:var(--danger)" id="purchase-day-total">฿0.00</span>
+      </div>
+      <div id="purchase-history-list"></div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ========== MENU EDIT MODAL ========== -->
+<div id="menu-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span id="modal-title">+ เพิ่มเมนูใหม่</span>
+      <button class="modal-close" onclick="app.closeMenuModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" data-i18n="menus.name_label">ชื่อเมนู</label>
+        <input type="text" id="menu-name" class="form-control"
+               data-i18n-placeholder="menus.name_ph" placeholder="เช่น Iced Cafe Latte">
+      </div>
+
+      <div class="card-title" style="margin:12px 0 6px" data-i18n="menus.ingredients">วัตถุดิบ</div>
+      <table class="ing-table">
+        <thead>
+          <tr>
+            <th data-i18n="menus.col_num">#</th>
+            <th data-i18n="menus.col_ing">วัตถุดิบ</th>
+            <th data-i18n="menus.col_total_qty">ปริมาณทั้งหมด</th>
+            <th data-i18n="menus.col_total_price">ราคาทั้งหมด (฿)</th>
+            <th data-i18n="menus.col_used">ที่ใช้</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="ing-tbody"></tbody>
+      </table>
+      <button class="btn btn-secondary btn-sm mt-8" onclick="app.addIng()" data-i18n="menus.add_ing">+ เพิ่มวัตถุดิบ</button>
+
+      <div class="form-row mt-12">
+        <div class="form-group">
+          <label class="form-label">VAT (฿)</label>
+          <input type="number" id="menu-vat" class="form-control" value="30" min="0">
+        </div>
+      </div>
+
+      <div class="card-title" style="margin:12px 0 6px" data-i18n="menus.packaging">บรรจุภัณฑ์ Delivery</div>
+      <table class="ing-table">
+        <thead>
+          <tr>
+            <th data-i18n="menus.col_num">#</th>
+            <th data-i18n="menus.col_pkg">บรรจุภัณฑ์</th>
+            <th data-i18n="menus.col_total_qty">ปริมาณทั้งหมด</th>
+            <th data-i18n="menus.col_total_price">ราคาทั้งหมด (฿)</th>
+            <th data-i18n="menus.col_used">ที่ใช้</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="pkg-tbody"></tbody>
+      </table>
+      <button class="btn btn-secondary btn-sm mt-8" onclick="app.addPkg()" data-i18n="menus.add_pkg">+ เพิ่มบรรจุภัณฑ์</button>
+
+      <div class="form-row mt-12">
+        <div class="form-group">
+          <label class="form-label">Packaging Waste (%)</label>
+          <input type="number" id="pkg-waste" class="form-control" value="5" min="0" max="100">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span data-i18n="menus.multiplier">ตัวคูณ</span> <img src="assets/grab-logo.svg" style="height:14px;vertical-align:middle"></label>
+          <input type="number" id="company1-gp" class="form-control" value="1.5" min="1" max="10" step="0.01">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span data-i18n="menus.multiplier">ตัวคูณ</span> <img src="assets/lineman-logo.svg" style="height:14px;vertical-align:middle"></label>
+          <input type="number" id="company2-gp" class="form-control" value="1.25" min="1" max="10" step="0.01">
+        </div>
+      </div>
+
+      <div class="card-title" style="margin:12px 0 6px" data-i18n="menus.sell_price_title">ราคาขาย (กำหนดเอง)</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">🏪 หน้าร้าน (฿)</label>
+          <input type="number" id="sell-instore" class="form-control" min="0" step="1"
+                 placeholder="อัตโนมัติ" onchange="app.updateModalCalc()">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><img src="assets/grab-logo.svg" style="height:14px;vertical-align:middle"> Grab (฿)</label>
+          <input type="number" id="sell-delivery1" class="form-control" min="0" step="1"
+                 placeholder="อัตโนมัติ" onchange="app.updateModalCalc()">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><img src="assets/lineman-logo.svg" style="height:14px;vertical-align:middle"> LINE MAN (฿)</label>
+          <input type="number" id="sell-delivery2" class="form-control" min="0" step="1"
+                 placeholder="อัตโนมัติ" onchange="app.updateModalCalc()">
+        </div>
+      </div>
+
+      <div class="card-title" style="margin:10px 0 4px" data-i18n="menus.calc_preview">ราคาคำนวณ (preview)</div>
+      <div class="calc-preview" id="modal-calc"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="app.closeMenuModal()" data-i18n="menus.cancel">ยกเลิก</button>
+      <button class="btn btn-primary"   onclick="app.saveMenu()"       data-i18n="menus.save">💾 บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== COST DETAIL MODAL ========== -->
+<div id="cost-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span id="cost-modal-title">🧮 ต้นทุน</span>
+      <button class="modal-close" onclick="app.closeCostModal()">✕</button>
+    </div>
+    <div class="modal-body" id="cost-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="app.closeCostModal()" data-i18n="menus.close">ปิด</button>
+      <button class="btn btn-primary" id="cost-modal-edit-btn" data-i18n="menus.edit_btn">✏️ แก้ไขเมนู</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PURCHASE MODAL ========== -->
+<div id="purchase-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span id="purchase-modal-title" data-i18n="purchase.add_title">+ เพิ่มรายการซื้อ</span>
+      <button class="modal-close" onclick="app.closePurchaseModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" data-i18n="purchase.name_label">ชื่อวัตถุดิบ</label>
+        <input type="text" id="purchase-ing-name" class="form-control"
+               data-i18n-placeholder="purchase.name_ph" placeholder="เช่น เมล็ดกาแฟ, นมสด">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-i18n="purchase.qty_label">จำนวน</label>
+          <input type="number" id="purchase-qty" class="form-control" min="0" step="any" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="purchase.unit_label">หน่วย</label>
+          <select id="purchase-unit" class="form-control">
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="ml">ml</option>
+            <option value="L">L</option>
+            <option value="ชิ้น">ชิ้น</option>
+            <option value="ถุง">ถุง</option>
+            <option value="กล่อง">กล่อง</option>
+            <option value="แพ็ค">แพ็ค</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="purchase.price_label">ราคารวม (฿)</label>
+        <input type="number" id="purchase-price" class="form-control" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="purchase.note_label">หมายเหตุ (ไม่บังคับ)</label>
+        <input type="text" id="purchase-note" class="form-control"
+               data-i18n-placeholder="purchase.note_ph" placeholder="เช่น ซื้อจากร้าน X">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="app.closePurchaseModal()" data-i18n="purchase.cancel">ยกเลิก</button>
+      <button class="btn btn-primary"   onclick="app.savePurchase()"       data-i18n="purchase.save">💾 บันทึก</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
