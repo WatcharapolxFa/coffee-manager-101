@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* RADIANT Coffee & Bakery palette (same tokens as the old style.css) */
+@theme {
+  --color-bg:          #F4EBDB;
+  --color-surface:     #FFFFFF;
+  --color-surface-2:   #FBF5E9;
+  --color-surface-3:   #F0E5D0;
+  --color-ink:         #2A1810;
+  --color-ink-soft:    #6B5849;
+  --color-ink-mute:    #A89887;
+  --color-line:        #E8DCC4;
+  --color-line-soft:   #F0E6D2;
+  --color-accent:      #C2410C;
+  --color-accent-700:  #9A3308;
+  --color-accent-soft: #FCEEDE;
+  --color-gold:        #B8853F;
+  --color-success:     #5C7F44;
+  --color-success-soft:#E9EFDE;
+  --color-danger:      #B23A2B;
+  --color-danger-soft: #FBEBE7;
+
+  --font-sans: var(--font-plex-thai), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --shadow-card: 0 4px 16px rgba(58,38,24,.07), 0 1px 4px rgba(58,38,24,.04);
+  --shadow-soft: 0 1px 2px rgba(58,38,24,.04), 0 1px 3px rgba(58,38,24,.05);
+}
+
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 15px;
+  }
+  input, select, button { font: inherit; }
+  input[type="number"]::-webkit-inner-spin-button { opacity: .4; }
+}
+
+@layer components {
+  .card      { @apply bg-surface rounded-[20px] p-5 shadow-card mb-4; }
+  .card-title{ @apply text-[13px] font-semibold uppercase tracking-wider text-ink-soft mb-3; }
+  .btn-primary   { @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[.98] disabled:opacity-50 cursor-pointer bg-accent text-white shadow-[0_4px_14px_rgba(194,65,12,.30)] hover:bg-accent-700; }
+  .btn-secondary { @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[.98] disabled:opacity-50 cursor-pointer bg-surface text-ink border border-line hover:bg-surface-2; }
+  .btn-danger    { @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[.98] disabled:opacity-50 cursor-pointer bg-danger-soft text-danger hover:bg-danger hover:text-white; }
+  .btn-sm    { @apply px-3 py-1.5 text-[13px]; }
+  .icon-btn  { @apply grid size-9 place-items-center rounded-xl border border-line bg-surface text-base hover:bg-surface-2 cursor-pointer; }
+  .input     { @apply w-full rounded-xl border border-line bg-surface px-3 py-2.5 text-[15px] outline-none focus:border-accent focus:ring-2 focus:ring-accent/15; }
+  .input-cell{ @apply w-full min-w-0 rounded-lg border border-line-soft bg-surface-2 px-2 py-1.5 text-sm outline-none focus:border-accent; }
+  .label     { @apply mb-1.5 block text-[13px] font-medium text-ink-soft; }
+  .num       { @apply font-mono tabular-nums; }
+}

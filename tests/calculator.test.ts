@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calcMenu, getUnitPrice, getUnitCost } from '../src/calculator.ts';
+import { calcMenu, getUnitPrice, getUnitCost } from '../src/lib/calculator';
 
 const ICE_LATTE = {
   ingredients: [

@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ingredients / packaging: [{ name, totalQty, totalPrice, usedQty }]
+// hiddenCosts: [{ name, amount }]
+// sellPrice: { instore?, delivery1?, delivery2? } | null
+model Menu {
+  id             String   @id @default(cuid())
+  name           String
+  category       String   @default("")
+  description    String   @default("")
+  featured       Boolean  @default(false)
+  visible        Boolean  @default(true)
+  ingredients    Json
+  hiddenCosts    Json
+  vat            Float
+  packaging      Json
+  packagingWaste Float
+  company1GP     Float
+  company2GP     Float
+  sellPrice      Json?
+  createdAt      DateTime @default(now())
+}
+
+// menuId is not a relation on purpose: deleting a menu keeps its sales history.
+model Sale {
+  id        String   @id @default(cuid())
+  date      String // "YYYY-MM-DD"
+  menuId    String
+  menuName  String
+  qty       Int
+  channel   String // "instore" | "delivery1" | "delivery2"
+  unitPrice Float
+  unitCost  Float
+  revenue   Float
+  createdAt DateTime @default(now())
+
+  @@index([date])
+}
+
+model Purchase {
+  id         String   @id @default(cuid())
+  date       String // "YYYY-MM-DD"
+  name       String
+  qty        Float
+  unit       String
+  totalPrice Float
+  note       String   @default("")
+  createdAt  DateTime @default(now())
+
+  @@index([date])
+}
+
+model OverheadItem {
+  id       String @id @default(cuid())
+  month    String // "YYYY-MM"
+  position Int
+  name     String
+  amount   Float
+
+  @@index([month])
+}

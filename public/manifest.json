@@ -2,7 +2,7 @@
   "name": "Coffee Manager 101",
   "short_name": "Coffee",
   "description": "คำนวณต้นทุนและบันทึกยอดขายร้านกาแฟ",
-  "start_url": "/coffee-manager-101/",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#FDF6EC",

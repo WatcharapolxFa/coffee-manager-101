@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { thb, todayStr, daysInMonth, genId, menuIcon, escapeHtml } from '../src/utils.ts';
+import { thb, todayStr, daysInMonth, genId, menuIcon } from '../src/lib/utils';
 
 describe('thb', () => {
   it('formats zero',           () => expect(thb(0)).toBe('฿0'));
@@ -61,14 +61,4 @@ describe('menuIcon', () => {
     expect(menuIcon('Unknown', 10)).toBe(icons[0]);
     expect(menuIcon('Unknown', 11)).toBe(icons[1]);
   });
-});
-
-describe('escapeHtml', () => {
-  it('escapes < and >', ()  => expect(escapeHtml('<b>bold</b>')).toBe('&lt;b&gt;bold&lt;/b&gt;'));
-  it('escapes &', ()        => expect(escapeHtml('a&b')).toBe('a&amp;b'));
-  it('escapes double quote',() => expect(escapeHtml('"hi"')).toBe('&quot;hi&quot;'));
-  it('escapes single quote',() => expect(escapeHtml("it's")).toBe('it&#x27;s'));
-  it('handles number input',() => expect(escapeHtml(42)).toBe('42'));
-  it('handles null',         () => expect(escapeHtml(null)).toBe(''));
-  it('leaves safe text alone',() => expect(escapeHtml('Hello World')).toBe('Hello World'));
 });

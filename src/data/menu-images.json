@@ -1,0 +1,21 @@
+{
+  "cocoa": {
+    "and-cocoa-premium-strawberry": "/menu-photos/cocoa/Premium-Cocoa-%26-Strawberry.png"
+  },
+  "coffee": {
+    "americano-and-honey-lime-with": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png",
+    "latte-mint": "/menu-photos/coffee/Iced-Mint-Latte.png",
+    "cocoa-mint-premium": "/menu-photos/coffee/Premium-Cocoa-Mint.png",
+    "latte-vanilla": "/menu-photos/coffee/Vanilla-Latte.png"
+  },
+  "matcha": {
+    "matcha-strawberry": "/menu-photos/matcha/Matcha-Strawberry.png"
+  },
+  "milk": {
+    "double-milk-mint": "/menu-photos/milk/Milk-Double-Mint.png",
+    "milk-strawberry": "/menu-photos/milk/Strawberry-Milk.png"
+  },
+  "tea": {
+    "black-lime-tea": "/menu-photos/tea/black-tea-lime.png"
+  }
+}
