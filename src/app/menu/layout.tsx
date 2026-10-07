@@ -1,9 +1,8 @@
 import type { Viewport } from 'next';
-import { Grandstander, Mali } from 'next/font/google';
+import { Mali } from 'next/font/google';
 
-// Customer menu (/menu): playful display face for titles, Mali for Thai and body text.
-const display = Grandstander({ subsets: ['latin'], weight: ['700', '900'], style: ['normal', 'italic'], variable: '--font-poster' });
-const body = Mali({ subsets: ['thai', 'latin'], weight: ['400', '600', '700'], variable: '--font-poster-body' });
+// Customer menu (/menu): one rounded, playful font for everything, Thai and Latin alike.
+const mali = Mali({ subsets: ['thai', 'latin'], weight: ['400', '600', '700'], style: ['normal', 'italic'] });
 
 // Safari status bar / toolbar tint matches the night-sky poster.
 export const viewport: Viewport = {
@@ -23,7 +22,7 @@ html { -webkit-text-size-adjust: 100%; background: #24183F; scroll-behavior: smo
 
 export default function CustomerMenuLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${display.variable} ${body.variable} min-h-dvh overflow-x-clip bg-[#24183F] font-[family-name:var(--font-poster-body)] text-[#FFF1C9]`}>
+    <div className={`${mali.className} min-h-dvh overflow-x-clip bg-[#24183F] text-[#FFF1C9]`}>
       <style>{css}</style>
       {children}
     </div>

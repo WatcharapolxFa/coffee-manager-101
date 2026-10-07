@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { SHOP_NAME } from '@/lib/config';
 import { getMenuPages } from '@/lib/menu-public';
-import { MenuPoster, type HeroStyle } from '@/components/halloween/MenuPoster';
+import { MenuPoster } from '@/components/halloween/MenuPoster';
 import { CategoryDock } from '@/components/halloween/CategoryDock';
 import { CandyCorn, Pumpkin } from '@/components/halloween/Spooky';
 
@@ -15,10 +15,7 @@ export const metadata: Metadata = {
   description: `เมนูเครื่องดื่มร้าน ${SHOP_NAME}`,
 };
 
-export default async function CustomerMenuPage({ searchParams }: PageProps<'/menu'>) {
-  // TEMP: ?v=halo|card|hill to compare cup styles; remove once one is chosen.
-  const v = (await searchParams).v;
-  const heroStyle: HeroStyle = v === 'card' || v === 'hill' ? v : 'halo';
+export default async function CustomerMenuPage() {
   const pages = await getMenuPages();
 
   return (
@@ -26,7 +23,7 @@ export default async function CustomerMenuPage({ searchParams }: PageProps<'/men
       <h1 className="sr-only">เมนู {SHOP_NAME}</h1>
       {pages.length === 0 && <p className="py-24 text-center text-[#FFF1C9]/70">ยังไม่มีเมนู</p>}
       {pages.map(({ category, items }, i) => (
-        <MenuPoster key={category.slug} category={category} items={items} first={i === 0} heroStyle={heroStyle} />
+        <MenuPoster key={category.slug} category={category} items={items} first={i === 0} />
       ))}
 
       <footer className="flex flex-col items-center gap-2 px-4 pt-8 pb-[calc(env(safe-area-inset-bottom)+6.5rem)] text-center">
@@ -35,8 +32,8 @@ export default async function CustomerMenuPage({ searchParams }: PageProps<'/men
           <Pumpkin className="size-10" />
           <CandyCorn className="size-7 rotate-12" />
         </div>
-        <p className="text-sm font-semibold text-[#FFE3C2]">Happy Halloween! ขอให้สนุกกับเครื่องดื่มนะ</p>
-        <p className="text-[11px] text-[#FFF1C9]/50">รูปใช้เพื่อการโฆษณา · {SHOP_NAME}</p>
+        <p className="text-base font-semibold text-[#FFE3C2]">Happy Halloween! ขอให้สนุกกับเครื่องดื่มนะ</p>
+        <p className="text-xs text-[#FFF1C9]/55">รูปใช้เพื่อการโฆษณา · {SHOP_NAME}</p>
       </footer>
 
       <CategoryDock items={pages.map(p => ({ slug: p.category.slug, title: p.category.title }))} />

@@ -13,6 +13,7 @@ const photoPatterns = Object.values(menuImages as Record<string, Record<string, 
 
 const nextConfig: NextConfig = {
   images: {
+    qualities: [75, 90],   // menu photos use 90 so glass, ice and foam stay crisp
     localPatterns: process.env.NODE_ENV === 'development'
       ? [{ pathname: '/menu-photos/**' }, { pathname: '/**', search: '' }]
       : [...photoPatterns, { pathname: '/**', search: '' }],

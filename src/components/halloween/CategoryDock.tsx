@@ -58,7 +58,7 @@ export function CategoryDock({ items }: { items: DockItem[] }) {
               data-slug={item.slug}
               aria-current={on ? 'true' : undefined}
               onClick={() => go(item.slug)}
-              className={`min-h-11 shrink-0 snap-center rounded-full px-4 text-[15px] font-semibold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF8A3D]/50 ${
+              className={`min-h-11 shrink-0 snap-center rounded-full px-4 text-base font-semibold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF8A3D]/50 ${
                 on ? 'bg-[#FFB067] text-[#2A1A48] shadow-[0_2px_10px_rgba(255,138,61,0.45)]' : 'text-[#FFF1C9]/85 active:bg-white/10'
               }`}
             >
