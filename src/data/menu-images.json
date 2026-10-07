@@ -1,21 +1,31 @@
 {
   "cocoa": {
-    "and-cocoa-premium-strawberry": "/menu-photos/cocoa/Premium-Cocoa-%26-Strawberry.png"
+    "and-cocoa-premium-strawberry": "/menu-photos/cocoa/Premium-Cocoa-%26-Strawberry.png?v=08e417cbd7",
+    "cocoa-premium": "/menu-photos/cocoa/Premium-Cocoa.png?v=efe35da511"
   },
   "coffee": {
-    "americano-and-honey-lime-with": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png",
-    "latte-mint": "/menu-photos/coffee/Iced-Mint-Latte.png",
-    "cocoa-mint-premium": "/menu-photos/coffee/Premium-Cocoa-Mint.png",
-    "latte-vanilla": "/menu-photos/coffee/Vanilla-Latte.png"
+    "americano-coconut": "/menu-photos/coffee/Americano-Coconut.png?v=73c42ba898",
+    "americano-and-honey-lime-with": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png?v=980aeb68e4",
+    "latte-mint": "/menu-photos/coffee/Iced-Mint-Latte.png?v=96f90adabe",
+    "americano-orange": "/menu-photos/coffee/Iced-Orange-Americano.png?v=2815d1af46",
+    "cocoa-mint-premium": "/menu-photos/coffee/Premium-Cocoa-Mint.png?v=bf3559c750",
+    "latte-vanilla": "/menu-photos/coffee/Vanilla-Latte.png?v=cb27ca4495"
   },
   "matcha": {
-    "matcha-strawberry": "/menu-photos/matcha/Matcha-Strawberry.png"
+    "clear-matcha": "/menu-photos/matcha/Clear-Matcha.png?v=8ab47bb667",
+    "coconut-matcha": "/menu-photos/matcha/Coconut-Matcha.png?v=0424a25647",
+    "latte-matcha": "/menu-photos/matcha/Matcha-Latte.png?v=19a68716b4",
+    "matcha-strawberry": "/menu-photos/matcha/Matcha-Strawberry.png?v=5f61e76177"
   },
   "milk": {
-    "double-milk-mint": "/menu-photos/milk/Milk-Double-Mint.png",
-    "milk-strawberry": "/menu-photos/milk/Strawberry-Milk.png"
+    "double-milk-mint": "/menu-photos/milk/Milk-Double-Mint.png?v=9ce116c9e1",
+    "milk-strawberry": "/menu-photos/milk/Strawberry-Milk.png?v=773c77bacb"
+  },
+  "soda": {
+    "บ๊วยโซดา": "/menu-photos/soda/%E0%B8%9A%E0%B9%8A%E0%B8%A7%E0%B8%A2%E0%B9%82%E0%B8%8B%E0%B8%94%E0%B8%B2.png?v=8f223aee9b"
   },
   "tea": {
-    "black-lime-tea": "/menu-photos/tea/black-tea-lime.png"
+    "black-tea": "/menu-photos/tea/Black-Tea.png?v=956f11022a",
+    "black-lime-tea": "/menu-photos/tea/black-tea-lime.png?v=9fa97fde81"
   }
 }

@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // Scans public/menu-photos/<category-slug>/ for drink photos and writes src/data/menu-images.json:
-// { "<category-slug>": { "<normalized file name>": "/menu-photos/<slug>/<file>" } }.
+// { "<category-slug>": { "<normalized file name>": "/menu-photos/<slug>/<file>?v=<content hash>" } }.
+// The hash changes whenever a photo is edited, so browsers and the image optimizer never show a stale one.
 // Runs before `next dev` / `next build` (predev / prebuild), so dropping a photo in the folder
 // and restarting is enough. File names are matched to menu names with normalizeName().
-import { readdirSync, statSync, writeFileSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync, writeFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, parse } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
@@ -25,7 +27,8 @@ if (existsSync(MENU_DIR)) {
     for (const file of readdirSync(dir)) {
       const { name, ext } = parse(file);
       if (!EXT.has(ext.toLowerCase())) continue;
-      (manifest[slug] ??= {})[normalizeName(name)] = `/menu-photos/${slug}/${encodeURIComponent(file)}`;
+      const hash = createHash('sha1').update(readFileSync(join(dir, file))).digest('hex').slice(0, 10);
+      (manifest[slug] ??= {})[normalizeName(name)] = `/menu-photos/${slug}/${encodeURIComponent(file)}?v=${hash}`;
     }
   }
 }
