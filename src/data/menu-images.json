@@ -8,6 +8,8 @@
     "americano-and-honey-lime-with": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png?v=980aeb68e4",
     "latte-mint": "/menu-photos/coffee/Iced-Mint-Latte.png?v=96f90adabe",
     "americano-orange": "/menu-photos/coffee/Iced-Orange-Americano.png?v=2815d1af46",
+    "latte": "/menu-photos/coffee/Latte.png?v=46748330d7",
+    "mocca": "/menu-photos/coffee/Mocca.png?v=1daed61881",
     "cocoa-mint-premium": "/menu-photos/coffee/Premium-Cocoa-Mint.png?v=bf3559c750",
     "latte-vanilla": "/menu-photos/coffee/Vanilla-Latte.png?v=cb27ca4495"
   },
@@ -26,6 +28,8 @@
   },
   "tea": {
     "black-tea": "/menu-photos/tea/Black-Tea.png?v=956f11022a",
+    "earl-grey": "/menu-photos/tea/Earl-Grey.png?v=25cd3808d1",
+    "tea-thai": "/menu-photos/tea/Thai-Tea.png?v=11eb6d8c8b",
     "black-lime-tea": "/menu-photos/tea/black-tea-lime.png?v=9fa97fde81"
   }
 }
