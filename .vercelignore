@@ -1,0 +1,14 @@
+# Never upload local data, secrets or raw photos when deploying with the Vercel CLI
+.env*
+dev.db
+dev.db-journal
+photos/
+public/promo/
+.next/
+node_modules/
+src/generated/
+.claude/
+coverage/
+*.tsbuildinfo
+dev.db-shm
+dev.db-wal
