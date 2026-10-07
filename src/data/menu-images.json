@@ -5,7 +5,7 @@
   },
   "coffee": {
     "americano-coconut": "/menu-photos/coffee/Americano-Coconut.png?v=73c42ba898",
-    "americano-and-honey-lime-with": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png?v=980aeb68e4",
+    "americano-and-honey-lime": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png?v=980aeb68e4",
     "americano": "/menu-photos/coffee/Americano.png?v=7f785c457c",
     "cappuccino": "/menu-photos/coffee/Cappuccino.png?v=a490dc403d",
     "caramel-macchiato": "/menu-photos/coffee/Caramel-Macchiato.png?v=aa899da1b8",
@@ -36,6 +36,7 @@
     "black-tea": "/menu-photos/tea/Black-Tea.png?v=956f11022a",
     "earl-grey": "/menu-photos/tea/Earl-Grey.png?v=25cd3808d1",
     "earl-grey-honey-lemon": "/menu-photos/tea/Earl-grey-honey-lemon.png?v=d63236acd2",
+    "cocoa-premium-tea-thai": "/menu-photos/tea/Thai-Tea-Premium-Cocoa.png?v=a4600803a0",
     "tea-thai": "/menu-photos/tea/Thai-Tea.png?v=11eb6d8c8b",
     "black-lime-tea": "/menu-photos/tea/black-tea-lime.png?v=9fa97fde81"
   }

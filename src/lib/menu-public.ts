@@ -17,8 +17,8 @@ export interface PublicMenuItem {
 }
 
 // Keep in sync with normalizeName() in scripts/gen-menu-images.mjs.
-// Word order and "iced"/"hot" don't matter: "Iced-Mint-Latte" matches the menu "Latte Mint".
-const IGNORED_WORDS = new Set(['iced', 'hot']);
+// Word order and "iced"/"hot"/"with" don't matter: "Iced-Mint-Latte" matches the menu "Latte Mint".
+const IGNORED_WORDS = new Set(['iced', 'hot', 'with']);
 
 export function normalizeName(s: string): string {
   return s.normalize('NFC').toLowerCase().replace(/&/g, ' and ')

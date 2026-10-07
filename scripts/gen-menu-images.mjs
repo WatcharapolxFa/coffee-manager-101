@@ -14,8 +14,8 @@ const OUT = join(ROOT, 'src/data/menu-images.json');
 const EXT = new Set(['.png', '.webp', '.jpg', '.jpeg', '.avif']);
 
 // Keep in sync with normalizeName() in src/lib/menu-public.ts.
-// Word order and "iced"/"hot" don't matter: "Iced-Mint-Latte" matches the menu "Latte Mint".
-const IGNORED_WORDS = new Set(['iced', 'hot']);
+// Word order and "iced"/"hot"/"with" don't matter: "Iced-Mint-Latte" matches the menu "Latte Mint".
+const IGNORED_WORDS = new Set(['iced', 'hot', 'with']);
 const normalizeName = s => s.normalize('NFC').toLowerCase().replace(/&/g, ' and ')
   .split(/[^a-z0-9฀-๿]+/).filter(w => w && !IGNORED_WORDS.has(w)).sort().join('-');
 
