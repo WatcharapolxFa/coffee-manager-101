@@ -200,11 +200,11 @@ const RECIPES: Omit<MenuInput, 'id' | 'category' | 'description' | 'featured' | 
 ];
 
 // Customer-facing menu, copied from the shop's LINE MAN page (Sunshine coffee).
-// `lineman` is the LINE MAN price (delivery2). Store prices come from RECIPES.
-const CATALOG: { category: string; name: string; description: string; lineman: number; featured?: boolean }[] = [
+// `lineman` is the LINE MAN price (delivery2). The store price is LINE MAN ÷ 1.5 rounded up to 5 baht, unless `instore` sets it.
+const CATALOG: { category: string; name: string; description: string; lineman: number; instore?: number; featured?: boolean }[] = [
   { category: "Matcha", name: "Matcha Latte", lineman: 130,
     description: "ทางร้านใช้ matcha taste ที่มีความถั่วชัด เข้มข้น และมีความนัวค่ะ หวานกำลังดี ได้ความหอมของชาเขียวในทุกแก้ว🍵💚" },
-  { category: "Matcha", name: "Clear Matcha", lineman: 90,
+  { category: "Matcha", name: "Clear Matcha", lineman: 90, instore: 70,
     description: "ทางร้านใช้ matcha taste ที่มีความถั่วชัด เข้มข้น ดื่มง่ายไม่ฝาดและไม่ขมค่ะ🍵💚" },
   { category: "Matcha", name: "Coconut Matcha", lineman: 120,
     description: "มัทฉะหอมละมุน ผสานกับน้ำมะพร้าวหอมหวานสดชื่น ได้รสชาเขียวที่นุ่มและเบาสบาย ดื่มง่าย ไม่ฝาดไม่ขม 🥥🍵" },
@@ -286,6 +286,6 @@ export const SEED_MENUS: Omit<MenuInput, 'id'>[] = CATALOG.map(item => {
     description: item.description,
     featured:    item.featured ?? false,
     visible:     true,
-    sellPrice:   { ...recipe?.sellPrice, instore: instorePrice(item.lineman), delivery2: item.lineman },
+    sellPrice:   { ...recipe?.sellPrice, instore: item.instore ?? instorePrice(item.lineman), delivery2: item.lineman },
   };
 });
