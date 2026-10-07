@@ -6,6 +6,8 @@
   "coffee": {
     "americano-coconut": "/menu-photos/coffee/Americano-Coconut.png?v=73c42ba898",
     "americano-and-honey-lime-with": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png?v=980aeb68e4",
+    "cappuccino": "/menu-photos/coffee/Cappuccino.png?v=a490dc403d",
+    "caramel-macchiato": "/menu-photos/coffee/Caramel-Macchiato.png?v=aa899da1b8",
     "latte-mint": "/menu-photos/coffee/Iced-Mint-Latte.png?v=96f90adabe",
     "americano-orange": "/menu-photos/coffee/Iced-Orange-Americano.png?v=2815d1af46",
     "latte": "/menu-photos/coffee/Latte.png?v=46748330d7",
@@ -20,7 +22,9 @@
     "matcha-strawberry": "/menu-photos/matcha/Matcha-Strawberry.png?v=5f61e76177"
   },
   "milk": {
+    "caramel-milk": "/menu-photos/milk/Milk-Caramel.png?v=996e07f7b8",
     "double-milk-mint": "/menu-photos/milk/Milk-Double-Mint.png?v=9ce116c9e1",
+    "milk-pink": "/menu-photos/milk/Pink%20Milk.png?v=617f4069fd",
     "milk-strawberry": "/menu-photos/milk/Strawberry-Milk.png?v=773c77bacb"
   },
   "soda": {
