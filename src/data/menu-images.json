@@ -6,6 +6,7 @@
   "coffee": {
     "americano-coconut": "/menu-photos/coffee/Americano-Coconut.png?v=73c42ba898",
     "americano-and-honey-lime-with": "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png?v=980aeb68e4",
+    "americano": "/menu-photos/coffee/Americano.png?v=7f785c457c",
     "cappuccino": "/menu-photos/coffee/Cappuccino.png?v=a490dc403d",
     "caramel-macchiato": "/menu-photos/coffee/Caramel-Macchiato.png?v=aa899da1b8",
     "latte-mint": "/menu-photos/coffee/Iced-Mint-Latte.png?v=96f90adabe",
@@ -28,11 +29,13 @@
     "milk-strawberry": "/menu-photos/milk/Strawberry-Milk.png?v=773c77bacb"
   },
   "soda": {
+    "punch-soda": "/menu-photos/soda/Punch-Soda.png?v=1635c18abc",
     "บ๊วยโซดา": "/menu-photos/soda/%E0%B8%9A%E0%B9%8A%E0%B8%A7%E0%B8%A2%E0%B9%82%E0%B8%8B%E0%B8%94%E0%B8%B2.png?v=8f223aee9b"
   },
   "tea": {
     "black-tea": "/menu-photos/tea/Black-Tea.png?v=956f11022a",
     "earl-grey": "/menu-photos/tea/Earl-Grey.png?v=25cd3808d1",
+    "earl-grey-honey-lemon": "/menu-photos/tea/Earl-grey-honey-lemon.png?v=d63236acd2",
     "tea-thai": "/menu-photos/tea/Thai-Tea.png?v=11eb6d8c8b",
     "black-lime-tea": "/menu-photos/tea/black-tea-lime.png?v=9fa97fde81"
   }
