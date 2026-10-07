@@ -216,7 +216,7 @@ const CATALOG: { category: string; name: string; description: string; lineman: n
     description: "☕️ กาแฟเอสเพรสโซ่รสเข้ม หอมกาแฟชัดเจน รสชาติกลมกล่อม เหมาะสำหรับคนที่ชอบกาแฟแบบเข้มข้น กาแฟชัด ค่ะ" },
   { category: "Coffee", name: "Latte", lineman: 80,
     description: "กาแฟนมหอมนุ่ม รสชาติละมุน กลมกล่อม ดื่มง่าย ได้ความหอมของกาแฟพอดี ๆ" },
-  { category: "Coffee", name: "Caramel Macchiato", lineman: 90,
+  { category: "Coffee", name: "Caramel Macchiato", lineman: 90, instore: 55,
     description: "กาแฟหอมเข้ม ผสมนมและคาราเมลหวานละมุน หอมกลมกล่อม ดื่มง่าย สายกาแฟแต่ต้องการเติมความหวานตัวนี้แนะนำเลยค่ะ 🤎" },
   { category: "Coffee", name: "Mocca", lineman: 80,
     description: "กาแฟหอมเข้มกับโกโก้ หวานนิด ๆ กลมกล่อมลงตัว ได้ทั้งความหอมของกาแฟและโกโก้ในแก้วเดียว 🤎" },
