@@ -1,0 +1,212 @@
+{
+  "/menu-photos/cocoa/Premium-Cocoa-%26-Strawberry.png?v=08e417cbd7": {
+    "x": 0.7973,
+    "y": 0.078,
+    "w": 459,
+    "h": 924,
+    "blur": "data:image/webp;base64,UklGRj4BAABXRUJQVlA4WAoAAAAQAAAACwAAFwAAQUxQSGwAAAARb6CgbSM3dgT2vvuPiICPY+xRZtYON9W2LQu2UUQLuM5E0ABEIAITrFbgT4DPHCbn57/aIBUi+h+xYaa9TkwjlEIIIjj7iP5v37+C8OMF84/J8+MB4/uv0Q26V+hcoHqEwgrSDUjFZqdNMQZWUDggrAAAANAEAJ0BKgwAGAA+0VSjS6gkoyGwCAEAGglmAJ0ygxgDR11r+eG1RTWCMM3QkfYwAPza6eVSW84lWbF2QQX/4/FqJIGIt6twAOYWg54yzbWsqWjK5dwSAD4LvndOxIk+ferFDe6L0HI53F/3lxa4GweUo77aNHrXBf1qI+tH583G5PJm/zCjB//2PgMf0+BhvyHDc37WUghhiKCEm3Y/59Z8bxju6JrFhPCDgAA="
+  },
+  "/menu-photos/cocoa/Premium-Cocoa.png?v=efe35da511": {
+    "x": 0.7902,
+    "y": 0.0569,
+    "w": 355,
+    "h": 735,
+    "blur": "data:image/webp;base64,UklGRgwBAABXRUJQVlA4WAoAAAAQAAAACwAAGAAAQUxQSGQAAAARZ6CgbRs2VQhvj8IiIqDcL6ssD9zU2vY0dAwggL1bYMdIk4CCzsT0CwASB8lGh8/V+6cqiOh/+N31iOSJiChckK0od7AD95O78OTpH/frHTtRHsh2pAs3wWqhmwcRE4Wgzw0BVlA4IIIAAADwAwCdASoMABkALplotFoiqCgoCACYS2AE6ZQANH5//8+jJCqyZ4PAAP73VnWwvd0ab+rv/wWn/fQcq/aLFERVINTrLt+lBMOM/2H5Lbygvhe3N5i+fSo0HSRafaYNjJMOmjLFmSpQ5x9KI/v9Qfr9YwpLtqngPUwfX/4E5zXNAAAA"
+  },
+  "/menu-photos/coffee/Americano-Coconut.png?v=73c42ba898": {
+    "x": 0.7845,
+    "y": 0.0806,
+    "w": 554,
+    "h": 743,
+    "blur": "data:image/webp;base64,UklGRggBAABXRUJQVlA4WAoAAAAQAAAACwAADwAAQUxQSGEAAAARb6C4bSQ1tV+GY4yIgC0XP69Sbq0JR7Vtq80PkxWUEAPxEAMogMbkIcOUa6Hjrj8qw1VzTUT0P5L1LwftDQDNn/LLw4fzi/mD6Y3+hd6ZzkKrp5FRjwFIRXyBRoj6ujcFAFZQOCCAAAAAsAIAnQEqDAAQAALATCWwAnS6ABCbGCSLf0mczBxIAPlvP8TNB8KwmPADQhRxa9EwjpJ5hG9002Ii7OJZ9rWmuXDXW4gjBjjTELoEwc9cZaTiqVOmQS469lW/epP4vFCcizqkaDHofUGL8YgFxBXPLr7xJXt87IdmiuDvYqOgAAA="
+  },
+  "/menu-photos/coffee/Americano-with-Honey-%26-Lime.png?v=980aeb68e4": {
+    "x": 0.7961,
+    "y": 0.108,
+    "w": 424,
+    "h": 885,
+    "blur": "data:image/webp;base64,UklGRiYBAABXRUJQVlA4WAoAAAAQAAAACwAAGAAAQUxQSGEAAAARb6CgbRs2VADdvxER6Mv+5M62DhzVtu0mP3QZCMBCmyIGJ2TEuPdeBERCZnTYbmgSIvofobyMQgh37VlpBNUbxE9IgNe39PkteXzbvt+/3qD7z/VbfILWESoNyIfOK20GAFZQOCCeAAAA8AQAnQEqDAAZAD7RVKNLqCSjIbAIAQAaCWwAnTKEdzeSgFcy1M/+3uFMKXw26DwAAP63JCqFttupvJiiOcShoLgP+LVoeqA1j57l7WqvDHYMd4rmASS5c0GXV96tqM6VGaB8eKNx+W6eIfCuoqYZZdnVagScA97AwpndgHG0QMX9R9JAf5qYRHA3n3seji9s4ChEZpn1OkrYm5/FAAA="
+  },
+  "/menu-photos/coffee/Americano.png?v=7f785c457c": {
+    "x": 0.8001,
+    "y": 0.045,
+    "w": 391,
+    "h": 819,
+    "blur": "data:image/webp;base64,UklGRjgBAABXRUJQVlA4WAoAAAAQAAAACwAAGAAAQUxQSGUAAAARb6CgbSQUvwFmiIiAR2lTmzYrA5vItp38oUMBEqiQkiRgBAlUlMyXQKgz9J/qJ9JT8x5BQkT/I+mEKP0WAICvWEkcFdG4GWLJTo6/40kucmP1ykl+YXZgaDGQ6KYAMDqsuAePAQBWUDggrAAAANAEAJ0BKgwAGQA+0VSjS6gkoyGwCAEAGglsAJ0yhHA3pIBXWP20VbZUIUUZRrXAAPlweVwjeTXV2tQiRlF5GClLXx85CZMrOjIr4Uq3uWlWwyKJTe9Ti7+UsgUdol2eXzdgGsmJPxgtUp1LeBBrYFeVHs9yHunkOxADIbDW3iILfa979q4BnuhMlzrqLhtY1vCN51KBZh532sP/NEX5nf0IDo/3f3x9eMIQAAA="
+  },
+  "/menu-photos/coffee/Cappuccino.png?v=a490dc403d": {
+    "x": 0.7807,
+    "y": 0.0688,
+    "w": 389,
+    "h": 774,
+    "blur": "data:image/webp;base64,UklGRhQBAABXRUJQVlA4WAoAAAAQAAAACwAAFwAAQUxQSGoAAAARb6CgbRs2VATdvxER6KHVO8f0AlADAUAQ4ZYYgEzSzA6MwAiMYAkSIzhUJnCrJLfbBvgfIaL/kW535tnAAcov6L1h9rH0j/ffs9ev3hO6D6jfoXaF6gUqJ8htITOEVAviJRzDgen7WA4AVlA4IIQAAAAwBACdASoMABgAPtFUo0uoJKMhsAgBABoJbACdMoRwACF9cOocsrNs8gAA/us2ILdC5Z0rqmCRQezkjKkk3xxDSmQSHv1bKwrjxXlBiCKqEyvVuqmL1RXl/ZZ8PwT4fR3gNh86yNBCN1lxcciRly6Ij/69BOEPCjK0C+Otm+CoqTAIAAA="
+  },
+  "/menu-photos/coffee/Caramel-Macchiato.png?v=aa899da1b8": {
+    "x": 0.7882,
+    "y": 0.0584,
+    "w": 436,
+    "h": 905,
+    "blur": "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAACwAAGAAAQUxQSGMAAAARZ6CgbSM3dwT2vnsCHxEBX+WV4kSrw02tbWsTMJAUpprBsXMnFlEXUdATAwUDNDFdWSEJEf2fg2S8mZ7iB0w+kP0gL/rDsZqi+lxLCmniX/CDvOgL2RtmN+j1cY2D9W7bDQAAVlA4IJYAAACQBACdASoMABkAPtFUo0uoJKMhsAgBABoJbACdMoRwN6AAWSU2I7k4aF4N4QAA/rGcJFYaQ1EjQwlC7hXTpMPROtsjwF/oPN0SJdh1t0NF60DiP/RODblPYdegDSq4fG83r8KUzyJ6J+j37teHMi+JreXTvSAjj/Wy/84JV6JQoB/OiOnzWtp+E40rDGrap6wlBODgAAA="
+  },
+  "/menu-photos/coffee/Espresso.png?v=2fa45660ae": {
+    "x": 0.7954,
+    "y": 0.0634,
+    "w": 466,
+    "h": 798,
+    "blur": "data:image/webp;base64,UklGRhYBAABXRUJQVlA4WAoAAAAQAAAACwAAFAAAQUxQSGEAAAARb6C2bRs25tWb00tEBGyG32r3jAbT2tqbpCzwe1ZBMwU4pkChUDACI2SEKJqKo8M3TeoIEf0Pqru+4BMAlJcdb6se57X6C/7WIOG32lGf89rhstVusxaAkbQBOWO0NYIBAFZQOCCOAAAAsAQAnQEqDAAVAD7RVKRLqCSjobAIAQAaCWwAnTKEcDeAAGNF28++V1SXBcGwgAD+51Dsv7ljLrDnZ0UNURi/ZEKaIQwr+mPVl4srufol5Kt/PXiKcBZN2dd0TxPWHKHGkcijVf8NBu2YG7kdXxqxBpuXwngojXjrtXQa6HZEHKm7zxPMGcIlc+AlmsAAAA=="
+  },
+  "/menu-photos/coffee/Iced-Mint-Latte.png?v=96f90adabe": {
+    "x": 0.7927,
+    "y": 0.0504,
+    "w": 404,
+    "h": 807,
+    "blur": "data:image/webp;base64,UklGRggBAABXRUJQVlA4WAoAAAAQAAAACwAAFwAAQUxQSFcAAAARX6CmkRQ4eA5eKhxQExGBD+PZiAemAQAmwamcY5m0SuMCh04krqMnrLmdh54Q0f+IiqXKHWKMMUBeUF/o96m+4V2+Te/iavhVshu9wB1f2XiF1qxRbAEAVlA4IIoAAABwBACdASoMABgAPtFUo0uoJKMhsAgBABoJaACxGwABrE9KKHJwAo05xlZ3gAD+ymn0VmRwOlO0KW3TjZliveCgUafqYGkqNjJdZp2MSiL8SU7i2k/r4n/zFLvelJ+wpdP8Wb/pIxaDHJ4n4yFa0ewCVV6f8VVaEcppvuHuT+WbJOi5L+ar1okYAAA="
+  },
+  "/menu-photos/coffee/Iced-Orange-Americano.png?v=2815d1af46": {
+    "x": 0.7912,
+    "y": 0.0628,
+    "w": 593,
+    "h": 650,
+    "blur": "data:image/webp;base64,UklGRu4AAABXRUJQVlA4WAoAAAAQAAAACwAADAAAQUxQSFsAAAARb6C4bSQ1tX+mY4iIgLaxrcH+0bPBTbVty/L9CmyMGoKNiQ4UIIInoAAJ3FZCsNrkdvWK6H+MTy6z1g8OH5i+oPuA9g0aRyitoTCBtINr1MQilP/0Qtj/r5UAAFZQOCBsAAAAUAIAnQEqDAANAALATCWwAnS6AAMIsaoTcL4AAM3za+Vy8pfnfnVXelC+jeGpJKlZHQTmSMPw+8tKeh0Yvp1sPp5Opa492WdsTe/ZOxjlkDIeJ2P89f2B/wmht/5NMVH4ti4ITYA4b61MwAAA"
+  },
+  "/menu-photos/coffee/Latte.png?v=46748330d7": {
+    "x": 0.7773,
+    "y": 0.0538,
+    "w": 400,
+    "h": 813,
+    "blur": "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAACwAAFwAAQUxQSGcAAAARb6CgbRs2VAL7fxER4KiJd2/aMjCpbVsKC4WcFXgUEYhABCKMAX4EJs0iAhbFT8DHztw0762fIaL/E9DsUFNwAoB4ifzI8etIrYWZmZYRTKGVMxkHmjIJ95PoI+FJrBGANO1VbbEBAFZQOCCSAAAAMAQAnQEqDAAYAD7RVKNLqCSjIbAIAQAaCWgAnQAbtlFv7y/c20KokqTAAP6Q3t7ZeWlxtgo0BM+6Ay9kqHoX2S6B9zCupaca2rCO2PXqmuqtMItzy7gPrYBH93LP1JTACtd1v00VsJpRM9Y99jNTuUA9dVEj2d1r3oRjfxQHFfr4DRiIS9DlvQGaMIaYdSfh4AA="
+  },
+  "/menu-photos/coffee/Mocca.png?v=1daed61881": {
+    "x": 0.7722,
+    "y": 0.0646,
+    "w": 362,
+    "h": 722,
+    "blur": "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAACwAAFwAAQUxQSGcAAAARb6C4bSQ1tW/mPYiIAP/9HM8b+a1wU9u2E0EVLcQyS0ACBvCAhNwjgZoKCbGGKoeZp+YyQUJE/0OvxilgVyIi+0b0KF4o3//WX8vn61txIzoRHvB3eCvcGfIAKQWnv4hqlslfjcEAAFZQOCCSAAAAkAQAnQEqDAAYAD7RVKNLqCSjIbAIAQAaCWwAnTKEcC/AAIxCPx/phKAL1aMAAP7XhyvHfGSqBqi1fRoUdOEB40qhgeERLebSf2BcdescuAOAX6w9hP99/PM2BA0u84ZxURqo/HjINeK0rnJoSl3+3QF6sb5czzs/+5jeKS5DG/V6uk0zinjYpGrILsMjxU1UAAA="
+  },
+  "/menu-photos/coffee/Premium-Cocoa-Mint.png?v=e7ecfb948b": {
+    "x": 0.7981,
+    "y": 0.0373,
+    "w": 392,
+    "h": 752,
+    "blur": "data:image/webp;base64,UklGRhoBAABXRUJQVlA4WAoAAAAQAAAACwAAFgAAQUxQSFIAAAARZ6C2jSQ1eCnf01H4EREw8QNr6loEHFXbNmN2smhgKYASKliLIIIAUwRW83TFwj8kiOh/ZHWvizYoTqi+P/6y37bXFcr7AsV8GyFNIAzyc4gDVlA4IKIAAABwBACdASoMABcAPtFUpEuoJKOhsAgBABoJbACdMoRwACnKtYVFfAPUn4090AD+kamYc+LVHB8aQu9Wci1DUAb4jlRXY/KMyQBc2r2KWV/7rAVx+pXKdl+I2nwbJQ1aBH5Hji+fzbepKaJM1YpukPuQu0Werxg4UJnDxv/lh9U5LT78IUCd5vdedMVN3ehNZr9F+DWSXwZrANOsjrroi/P38AA="
+  },
+  "/menu-photos/coffee/Vanilla-Latte.png?v=cb27ca4495": {
+    "x": 0.7927,
+    "y": 0.1046,
+    "w": 573,
+    "h": 691,
+    "blur": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4WAoAAAAQAAAACwAADQAAQUxQSF4AAAARX6CgkaQ2+Ap6f0AHERGANT8c47GASa1tT36mxtICvz0BKIAjwQY3NYoG/y/ZfPHeL0RE/82mbaMk3fqIN8osty4iovSF4mHYqZn1g51A/czN3g7wB3ATsJ1NqlIHVlA4IFwAAAAwAgCdASoMAA4AAsBMJbACdLoAAnMFEA2VgAD440exEpbXc+8Y5NF31Uzho56F1C36Bxlv9Qk8+/aq7RLUU3j/fe3kmoCFIacOAjD/rUI4FJQsQw/UOKQbfgAAAA=="
+  },
+  "/menu-photos/matcha/Clear-Matcha.png?v=8ab47bb667": {
+    "x": 0.7804,
+    "y": 0.0686,
+    "w": 441,
+    "h": 831,
+    "blur": "data:image/webp;base64,UklGRi4BAABXRUJQVlA4WAoAAAAQAAAACwAAFgAAQUxQSHgAAAARb6CgbRs2VATdvxER8J6wSGN9OdzU2rY2YZqy8w4SIoBKAiqhEiohYyc2UAE4dWSm9FPzfqcaIvpvNm0bJe3WHmIPdutM3BIRRV+ofrAhOPBVw5xjZ2P+6AP9N/Re0GUaT0gf/yR3iG/gXMGagRrWRJUgdBZDWQBWUDggkAAAAFAEAJ0BKgwAFwAumWi0WiKoKCgIAJhLYATpygJ0dBmm0dfgCaEHRhtSKoAA/u5OJSl80BXaNKlj3i3bJLLS0fIPPf2A6mB7jSAOxTYTRC3Ijj+wZ/9K2/7IqjB4giP0JN6+ne9/mqmqLzytkUzRrd0JyWNh8huNfY331iYsiHHqPNxTbout4K6xv1/+BEEAAA=="
+  },
+  "/menu-photos/matcha/Coconut-Matcha.png?v=0424a25647": {
+    "x": 0.7838,
+    "y": 0.0965,
+    "w": 435,
+    "h": 852,
+    "blur": "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAACwAAFwAAQUxQSGoAAAARZ6C2kaQ2+bn/yAM5ERGAr/Q7ZnA73NS27SgTLFBRjQQE5B4JlJQYSAoyVFnCCCCVEwhbFsFCRP8jSPrjMKidmcYZ1J8wf0MK7u8vpK//pyfMPx//J+VHAYPPHHoZdDdQTV6kUdDZDisBVlA4II4AAAAwBACdASoMABgAPtFWo0uoJKMhsAgBABoJaACdABuE5WXPmVkidA5LIQAA/sTgrwYQKwlNBzQOvbNgKIHX3R5Oi6e3Q3jJsAXDvriLoGvYfuXVKw5y77wlTewyQxKchA+j+14rkfeusD4n4sCHLosmxXL35HjXl6kohCt0mGOHe3wf3ny1yDA27L7ZwAAA"
+  },
+  "/menu-photos/matcha/Matcha-Latte.png?v=19a68716b4": {
+    "x": 0.7802,
+    "y": 0.1272,
+    "w": 377,
+    "h": 677,
+    "blur": "data:image/webp;base64,UklGRigBAABXRUJQVlA4WAoAAAAQAAAACwAAFQAAQUxQSGIAAAARb6CgbSQUvwFmiIiA8Mb0H7TQhNvYtpXqEpGSeR104Z1QgOUMpXgoX1N3P9U8qSGi/zGUbkx0A/4qXQEczA8AVD+2kP9lBx7SP/djC67+sOrF0gfztswpmKr9gFqhZNzpBFZQOCCgAAAAEAQAnQEqDAAWAD7RVKNLqCSjIbAIAQAaCWgAnS8AAXntFE5a355f/gAA/rIyNb4q9WGBxeq941BRb86SHVDivVetzqIbMtmTxaNfpbemclvbAk7IpkTeU7FNEPux7G8yxuEfIxW83dQH3aE7aG4NXr3a+qyB+JbbMAf3/kXVCbxJtIoPaalvNLW83wcIPeZ/sTiVPOA9iGx5xD+6G4AAAA=="
+  },
+  "/menu-photos/matcha/Matcha-Strawberry.png?v=5f61e76177": {
+    "x": 0.788,
+    "y": 0.0979,
+    "w": 529,
+    "h": 710,
+    "blur": "data:image/webp;base64,UklGRgIBAABXRUJQVlA4WAoAAAAQAAAACwAADwAAQUxQSF8AAAARb6CgbRs2VAT7fxERqCW3cBl5U7iJbVt1PjN1GCvpGQzEQwzEAzMaiAOmipmvmmMiov/h1Nu7GLslIkr9cfhh+kX/jeIT+TuiV0SW0EdQS5ALEHPgnR/RmGEq+4nLAABWUDggfAAAAFACAJ0BKgwAEAACwEwlsAJ0Bi+ttqZlMooqgAD+56q3HlzyfVJNdSn+uj/sA+wLWqSMYxAnMhGHQNcVoeUPfC2gvROWFPGbEnlG9WANlNRN8YajDzlMDuFhkWKgBIRwer+x/5G5Xn7Cl7gIevAxyip7Pa9okI3P/0QAAAA="
+  },
+  "/menu-photos/milk/Milk-Caramel.png?v=996e07f7b8": {
+    "x": 0.784,
+    "y": 0.0465,
+    "w": 476,
+    "h": 812,
+    "blur": "data:image/webp;base64,UklGRvIAAABXRUJQVlA4WAoAAAAQAAAACwAAEwAAQUxQSFQAAAARX6CmbSQ2dxDu2/Zbj4jAq2Yx3MLAJrJtJyQPSQkeco+EL4GOlpaK7+BTZt6V94KGiP7HQgh7/gKAI/bigCD25mr/PJPlfvPj6eHm5GrkLNoo1BFWUDggeAAAAFAEAJ0BKgwAFAA+0VSjS6gkoyGwCAEAGglqAJ0ygxgATlYfqcVLXnW2kaAA/tTFtUirmzuqej/6kGb/ApIMd/vib/sbyAre0ojnrqnkyY4JSNbf6LxKDvgJ0pdxhMV1pY2/5ulsWPVIHA88+wjvLCSz7diRH27QAA=="
+  },
+  "/menu-photos/milk/Milk-Double-Mint.png?v=9ce116c9e1": {
+    "x": 0.759,
+    "y": 0.0502,
+    "w": 525,
+    "h": 680,
+    "blur": "data:image/webp;base64,UklGRugAAABXRUJQVlA4WAoAAAAQAAAACwAADwAAQUxQSGMAAAARb6CgbRs2VAT7fxERoC1549VME0ANBABBhFuyyAy2gI0AM5AcFrDuI9Dhrbl1d729IvofrbP7XTv3Cwcf0H+HyisU7iB/AqktJDYQn0F0BJEGhOp4CJZxFUz/Mg4EmqfzSAAAVlA4IF4AAAAQAgCdASoMABAAAsBMJbACdAEVjGAlOmcAAP7oM1VH4Z1X3KQ6UyrsVkqEzj8XKi3D8YJKHd5jWPZcbkgTxi7RfR2jKAfbuZ74vV3BskU8NJgy5DeCSrHss0whAAAA"
+  },
+  "/menu-photos/milk/Pink%20Milk.png?v=617f4069fd": {
+    "x": 0.7927,
+    "y": 0.0923,
+    "w": 450,
+    "h": 785,
+    "blur": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4WAoAAAAQAAAACwAAFAAAQUxQSGUAAAARb6C4bSQ1tW/G44uIAK36F2f7GF1wW9u2En0yQm3CyiG1OlxyjVmU8EugAYscZl41l0UNEf2fAFZ0die0RET6DvEJ5QX9DfyB4QfL/xN9Xd7+MLzwB8oTnBWsDETpIuIC88dAYwBWUDggjAAAAPAEAJ0BKgwAFQA+0VamS6gko6GwCAEAGglsAJ0yhHc3pIEuPTb9rpmj2dhM/8BY4AD+8oB/DmEA7iWuzKkFCgsPajTiTf2MWy4iXCavjGIM2yJpcdNQ7/xousnD3/5NMb3vBm3b5Vk2gwZtosN2KWppIbqb8f+gCx9E8X/gABe2SwfgmOnZgRr0AAAA"
+  },
+  "/menu-photos/milk/Strawberry-Milk.png?v=773c77bacb": {
+    "x": 0.7824,
+    "y": 0.1191,
+    "w": 551,
+    "h": 691,
+    "blur": "data:image/webp;base64,UklGRu4AAABXRUJQVlA4WAoAAAAQAAAACwAADgAAQUxQSF8AAAARb6CgbSQUvwFmiIgAnOw2lI91hJtq25bl/f3/C/y4u0VhogBF3CYqOKsH8JXD5PakeUpE9D+k0h8kZQ4AuR+Xf+6+HL5Ze7B8Y+nMwJbOhFaTRvUKQI3+gKFI+7JwBQBWUDggaAAAADACAJ0BKgwADwACwEwlsAJ0AR/dVFdZmImAAP7wGyyaruEBBlLZKzZPZPdg7EIFd7yzgJAH8ZfJVdjsjYUPdoF4AHl7ZX6H2HDn9vY5bPAPN5t8odiEUgZ2rZ/GdMpAz/nfsOpXy0AA"
+  },
+  "/menu-photos/soda/Punch-Soda.png?v=1635c18abc": {
+    "x": 0.7728,
+    "y": 0.0649,
+    "w": 612,
+    "h": 700,
+    "blur": "data:image/webp;base64,UklGRv4AAABXRUJQVlA4WAoAAAAQAAAACwAADQAAQUxQSF8AAAARZ6CgbRs2VgTdfwQWEYHjV3O8YxSOattWmxdOXGTOAthBZHBSAXVQAUxz7pBmDNfVq4iI/kc6vKxz6QsAs7/Nm/sPDm5sHdlYsdpjKQNwFXwAMzJ/QE30Aiyi5DQQCQBWUDggeAAAAJACAJ0BKgwADgACwEwlsAJ0ugAQlBgTkedPGiIAAP6YV+FOeZoeOu/52yOWWB2caTW0G3DgqHDGdiPaUrnTUq48eEbVEuspNV6Ru1H+zQO8bZrER/8dWmLnO33AI9f2HPwmekL/80MN5nl/81vkxwk5QxvuEhHwAA=="
+  },
+  "/menu-photos/soda/%E0%B8%9A%E0%B9%8A%E0%B8%A7%E0%B8%A2%E0%B9%82%E0%B8%8B%E0%B8%94%E0%B8%B2.png?v=8f223aee9b": {
+    "x": 0.7855,
+    "y": 0.0676,
+    "w": 377,
+    "h": 719,
+    "blur": "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAACwAAFgAAQUxQSF4AAAARX6CgbRs2VQT7n8siIhAWb+N0wWBaW3uTnKgsgM8coHBtBEaIxXXPBomkg+zwj/f/558hov+h89VGsgcA8B80PzqyE/exL3b8g8XNGXphRk8uPTBoUekPwEkRLtYTVlA4IJwAAACwBACdASoMABcAPtFapkuoJaOhsAgBABoJbACdMoR3DhHgMs6jJvhnz0c46x6AAP611tPgSSIMwxgOMd8DBZ/mh3saqkooqX7D1Zk3dnv3vffsqBAYIDQ+QrhlL6HZ6grfMRl5p77LF9UrUuV0wn6mm07kJTxR5N+5yVLhvjEL5p8Zl7f/gzvii6iM50RIyTG1MH1/+hjNJCAAAAA="
+  },
+  "/menu-photos/tea/Black-Tea.png?v=956f11022a": {
+    "x": 0.7752,
+    "y": 0.0542,
+    "w": 431,
+    "h": 759,
+    "blur": "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAACwAAFAAAQUxQSGEAAAARX6AgAAg05kA3T0REQNQvzmkyg01t7U1CEYAOJmaQwMQcCSjgxAGZ6G3ujB1+eV9ONET0fwKiZlsT6yUiCj4IFfyHWCEIpdag2FW/1gfDA/ICcQDPwPXAZgWRz5gzpiYDAFZQOCCYAAAAsAQAnQEqDAAVAD7RVKNLqCSjIbAIAQAaCWgAnTKDGABIletIVBVNQGAwPy+DgAD+mEgqp4TtwDrJEb6sTmsWdegSVhddQsQDLNJzXt4PMv7lld1TflPRUiBufwRXk/a1z8abu/WX2WdkwVt+0mm1XBRxvhaQoeoLgv8JRWAU1bxrh0EC76gw3mMN2Uhhuhx76ej3wyRYAAA="
+  },
+  "/menu-photos/tea/Earl-Grey.png?v=25cd3808d1": {
+    "x": 0.7923,
+    "y": 0.109,
+    "w": 535,
+    "h": 670,
+    "blur": "data:image/webp;base64,UklGRvQAAABXRUJQVlA4WAoAAAAQAAAACwAADgAAQUxQSF8AAAARZ6AgAAg0ZkA3A0REwJ7+UKwXDpjW2rbk/9Nf0eR7sIAuwSYa2QAS2aNFh2+r7xsiov8K07Zh1N1TpHLrfN4CAHgvaojuIY2i75+8Ae3kqA4Uz8hIkXA/gI6zZKl1BgBWUDggbgAAALACAJ0BKgwADwACwEwlsAJ0ugEmAdKAC0SFIEkUQAD+mmaBM6fOdy2n1TbBclCNQtx1BalcOLvhwVS/bUuzbV1qRWCBs+NL94sLRt/8Nw6XeUzF/TMDzs+u7Pv929jJiUd7DhNf3rNGWmTeQAAA"
+  },
+  "/menu-photos/tea/Earl-grey-honey-lemon.png?v=d63236acd2": {
+    "x": 0.7894,
+    "y": 0.0435,
+    "w": 373,
+    "h": 762,
+    "blur": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4WAoAAAAQAAAACwAAGAAAQUxQSGUAAAARb6CobSM2VQLj5q8REThmlL2b/gWj2raV4BBGqxDgF0ESsIjAmJENvQGM3F6a+9aiQkT/wy/mOVQ3IiJxIDmRXchvlA97MfEPCyf2/U/8Rfkgv5FdSA6IFXYDy3+JSlkK2lSTAABWUDggjAAAAHAEAJ0BKgwAGQA+0TiwUygiJaOYAQAaCWwAnTKEcDeS/iqBNUJyaIokRG1AAP7oqXs3EhzqYZn4NmSAnHxNwIC/7v5w6luzkIqCvYv+//zC1vVrbAqGPR/n+//BOLXC6vuyaiKpdIcfBHDfBuSsmUOa8y6off6DIOuSMACj43Mz5ZGq0ZkzD5T6gAAA"
+  },
+  "/menu-photos/tea/Thai-Tea-Premium-Cocoa.png?v=a4600803a0": {
+    "x": 0.7751,
+    "y": 0.0651,
+    "w": 444,
+    "h": 734,
+    "blur": "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAACwAAEwAAQUxQSF8AAAARb6CgbRsWl8HbjYgA65++7eolmNTa9oRdYgehAhpFBCRyy43nEAFPBuxeb5rvO2SI6P8EONFc+tIFAO5HAiYEjZmG+8jITGC+Xy/zkPEi8UG8leg9UZwXiAWhWAZNAABWUDggmAAAABAEAJ0BKgwAFAA+0VSjS6gkoyGwCAEAGglsALEbAAGfW+jmuSTI+T2AAP6N31LGsgdXlmpjaN2MDu12wbe1ywI9BptrzuplkhD+GHSDSBehED/W3IR/UrPy+R+ug5aCBOXX1sAV+WoHfg5HLbrUBvLxGpVjXwS/1h/3CMsvRLtOXrpXNg2qbC5quD9GLrbrfHm0busVRAAA"
+  },
+  "/menu-photos/tea/Thai-Tea.png?v=11eb6d8c8b": {
+    "x": 0.7403,
+    "y": 0.0773,
+    "w": 542,
+    "h": 643,
+    "blur": "data:image/webp;base64,UklGRvIAAABXRUJQVlA4WAoAAAAQAAAACwAADQAAQUxQSFoAAAARb6CgbRs2VQbt/omIgDU3iu8nD7iqbVtV7nt4Bi9CB2K4VCCAFeCPPyfAi4C7zF4R/Y/F/7Bspv4w/kHyhvkTeneoX6G4h8IMckNIN3CIa1iH8KEXwuifZANWUDggcgAAAFACAJ0BKgwADgACwEwlsAJ0ugADDw8EB7ikAAD+xyd25qJG0IEje/XqY8RM7kilNG2jK24lbch49V2DBmh7xXI3o9FtCj3/00r1baj6Ao4O2k9RK//Ft77FP3UQRfMDRz3/4JrSEtlEdt+u/Yn+nUAAAA=="
+  },
+  "/menu-photos/tea/black-tea-lime.png?v=9fa97fde81": {
+    "x": 0.7955,
+    "y": 0.1178,
+    "w": 440,
+    "h": 813,
+    "blur": "data:image/webp;base64,UklGRigBAABXRUJQVlA4WAoAAAAQAAAACwAAFQAAQUxQSGcAAAARb6C4bSQ1tj86ZoaICPjcsZ6Ukyndw22tbUvzceiYgJLeF6H3ERglC7j0qd2TNiXOO837R0aI6H+INJEt1hY46y8AyGuO1IazlptO6XlWB77xx6D0PDeclSzuDJc0ggE4a7I+jU0BAFZQOCCaAAAAcAQAnQEqDAAWAD7RXKZMqCUjojAIAQAaCWwAnTKEcDeAbwABDMeFDthdzAAA/PVrmzqI9V/lPI1V6ifQ3pK2wD8zwdJv4/LCkLD9NHrR1yrbMB4d+iR4WW2Nvb92tLeo58PRSlnQcfD+ay7+yshI66CGabTRd8qTriuzOS17jKmlygz0CSOgenU7JGjK0/JxLDyx/XYr92sAAA=="
+  }
+}
